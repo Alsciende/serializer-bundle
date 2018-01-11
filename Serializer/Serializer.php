@@ -24,8 +24,7 @@ class Serializer
         EncodingService $encodingService,
         NormalizingService $normalizingService,
         ObjectManager $objectManager
-    )
-    {
+    ) {
         $this->storingService = $storingService;
         $this->encodingService = $encodingService;
         $this->normalizingService = $normalizingService;
@@ -82,6 +81,7 @@ class Serializer
         foreach ($this->encodingService->decode($block) as $fragment) {
             $result[] = $this->importFragment($fragment);
         }
+
         return $result;
     }
 

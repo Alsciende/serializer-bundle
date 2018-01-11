@@ -30,6 +30,7 @@ class ObjectManager
 
         $entity = new $className();
         $this->updateObject($entity, $identifiers);
+
         return $entity;
     }
 
@@ -49,8 +50,10 @@ class ObjectManager
             $referenceValue = $this->readObject($associationValue, $targetIdentifier);
         }
         $referenceKey = $associationKey . '_' . $targetIdentifier;
-        return array($referenceKey, $referenceValue);
+
+        return [$referenceKey, $referenceValue];
     }
+
     /* @var \Doctrine\ORM\EntityManager */
     private $entityManager;
 
@@ -75,6 +78,7 @@ class ObjectManager
                 $result[$mapping['fieldName']] = $mapping['targetEntity'];
             }
         }
+
         return $result;
     }
 
@@ -90,6 +94,7 @@ class ObjectManager
         foreach ($allMetadata as $metadata) {
             $result[] = $metadata->getName();
         }
+
         return $result;
     }
 
@@ -106,6 +111,7 @@ class ObjectManager
         if (count($identifierFieldNames) > 1) {
             throw new \InvalidArgumentException('Too many identifiers for ' . $classMetadata->getName());
         }
+
         return $identifierFieldNames[0];
     }
 
@@ -140,6 +146,7 @@ class ObjectManager
     {
         $classMetadata = $this->entityManager->getClassMetadata($className);
         $columnName = $classMetadata->getColumnName($fieldName);
+
         return $data[$columnName];
     }
 
@@ -178,6 +185,7 @@ class ObjectManager
     {
         $className = $this->getClassName($entity);
         $classMetadata = $this->entityManager->getClassMetadata($className);
+
         return $classMetadata->getFieldValue($entity, $field);
     }
 
@@ -209,6 +217,7 @@ class ObjectManager
         foreach ($classMetadata->getIdentifierFieldNames() as $identifierFieldName) {
             $result[$identifierFieldName] = $this->getIdentifierValue($data, $className, $identifierFieldName);
         }
+
         return $result;
     }
 
@@ -230,6 +239,7 @@ class ObjectManager
             if (!isset($data[$identifierFieldName])) {
                 throw new \InvalidArgumentException("Missing identifier for entity " . $className . " in data " . json_encode($data));
             }
+
             return $data[$identifierFieldName];
         } else {
             $associationMapping = $classMetadata->getAssociationMapping($identifierFieldName);
@@ -237,6 +247,7 @@ class ObjectManager
             if (!$association || !isset($association['associationValue'])) {
                 throw new \InvalidArgumentException("Cannot find entity referenced by $identifierFieldName in data " . json_encode($data));
             }
+
             return $association['associationValue'];
         }
     }
@@ -293,9 +304,9 @@ class ObjectManager
         $associationValue = $this->entityManager->getRepository($associationMapping['targetEntity'])->find($id);
 
         return [
-            'referenceKeys' => $referenceKeys,
-            'associationKey' => $associationMapping['fieldName'],
-            'associationValue' => $associationValue
+            'referenceKeys'    => $referenceKeys,
+            'associationKey'   => $associationMapping['fieldName'],
+            'associationValue' => $associationValue,
         ];
     }
 

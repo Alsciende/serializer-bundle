@@ -81,6 +81,7 @@ class ScanningService
     public function buildFromEntity ($entity)
     {
         $className = $this->objectManager->getClassName($entity);
+
         return $this->buildFromClass($className);
     }
 
@@ -103,6 +104,7 @@ class ScanningService
         if ($annotation instanceof \Alsciende\SerializerBundle\Annotation\Source) {
             $source = $this->buildSource($annotation, $reflectionClass);
             $cacheItem->set($source);
+
             return $source;
         }
     }
@@ -119,6 +121,7 @@ class ScanningService
                 $source->addProperty($reflectionProperty->name, $annotation->type);
             }
         }
+
         return $source;
     }
 

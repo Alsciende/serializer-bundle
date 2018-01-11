@@ -60,6 +60,7 @@ class StoringService
         foreach ($filenames as $filename) {
             $blocks = array_merge($blocks, $this->scanFile($filename));
         }
+
         return $blocks;
     }
 
@@ -72,7 +73,8 @@ class StoringService
     {
         $data = file_get_contents($path);
         $block = new Block($data, $path);
-        return array($block);
+
+        return [$block];
     }
 
 }
