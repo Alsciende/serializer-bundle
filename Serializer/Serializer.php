@@ -2,12 +2,12 @@
 
 namespace Alsciende\SerializerBundle\Serializer;
 
-use Alsciende\SerializerBundle\Manager\ObjectManagerInterface;
+use Alsciende\SerializerBundle\Manager\ObjectManager;
 use Alsciende\SerializerBundle\Model\Block;
 use Alsciende\SerializerBundle\Model\Fragment;
 use Alsciende\SerializerBundle\Model\Source;
 use Alsciende\SerializerBundle\Service\EncodingService;
-use Alsciende\SerializerBundle\Service\NormalizingServiceInterface;
+use Alsciende\SerializerBundle\Service\NormalizingService;
 use Alsciende\SerializerBundle\Service\StoringService;
 use Exception;
 
@@ -19,7 +19,12 @@ use Exception;
 class Serializer
 {
 
-    public function __construct (StoringService $storingService, EncodingService $encodingService, NormalizingServiceInterface $normalizingService, ObjectManagerInterface $objectManager)
+    public function __construct (
+        StoringService $storingService,
+        EncodingService $encodingService,
+        NormalizingService $normalizingService,
+        ObjectManager $objectManager
+    )
     {
         $this->storingService = $storingService;
         $this->encodingService = $encodingService;
@@ -38,12 +43,12 @@ class Serializer
     private $encodingService;
 
     /**
-     * @var NormalizingServiceInterface
+     * @var NormalizingService
      */
     private $normalizingService;
 
     /**
-     * @var ObjectManagerInterface
+     * @var ObjectManager
      */
     private $objectManager;
 

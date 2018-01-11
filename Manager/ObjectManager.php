@@ -1,8 +1,7 @@
 <?php
 
-namespace Alsciende\SerializerBundle\Manager\Entity;
+namespace Alsciende\SerializerBundle\Manager;
 
-use Alsciende\SerializerBundle\Manager\BaseObjectManager;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -10,10 +9,49 @@ use Doctrine\ORM\EntityManagerInterface;
  *
  * @author Alsciende <alsciende@icloud.com>
  */
-class ObjectManager extends BaseObjectManager
+class ObjectManager
 {
-    /* @var \Doctrine\ORM\EntityManager */
+    /**
+     * Find the entity referenced by the identifiers in $data, or create a new one with the correct identifiers
+     *
+     * @param array $data
+     * @param string $className
+     * @return object
+     */
+    function findOrCreateObject ($data, $className)
+    {
+        $identifiers = $this->getIdentifierValues($data, $className);
 
+        $entity = $this->findObject($identifiers, $className);
+
+        if (isset($entity)) {
+            return $entity;
+        }
+
+        $entity = new $className();
+        $this->updateObject($entity, $identifiers);
+        return $entity;
+    }
+
+    /**
+     * Return the reference corresponding to the assocation in the entity
+     *
+     * @param string $targetClass
+     * @param string $associationKey
+     * @param object|null $associationValue
+     * @return array
+     */
+    function getReferenceFromAssociation ($targetClass, $associationKey, $associationValue)
+    {
+        $targetIdentifier = $this->getSingleIdentifier($targetClass);
+        $referenceValue = null;
+        if ($associationValue !== null) {
+            $referenceValue = $this->readObject($associationValue, $targetIdentifier);
+        }
+        $referenceKey = $associationKey . '_' . $targetIdentifier;
+        return array($referenceKey, $referenceValue);
+    }
+    /* @var \Doctrine\ORM\EntityManager */
     private $entityManager;
 
     function __construct (EntityManagerInterface $entityManager)
@@ -22,7 +60,11 @@ class ObjectManager extends BaseObjectManager
     }
 
     /**
-     * {@inheritDoc}
+     * Returns an array of foreign key => foreign entity class
+     * for all classes that this class depends on
+     *
+     * @param string $className
+     * @return string[]
      */
     function getAllTargetClasses ($className)
     {
@@ -37,7 +79,9 @@ class ObjectManager extends BaseObjectManager
     }
 
     /**
-     * {@inheritDoc}
+     * Returns a list of all classes
+     *
+     * @return string[]
      */
     function getAllManagedClassNames ()
     {
@@ -50,7 +94,10 @@ class ObjectManager extends BaseObjectManager
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the single identifier of a class. Throws an exception if the class
+     * using a composite key
+     *
+     * @param string $className
      */
     function getSingleIdentifier ($className)
     {
@@ -63,7 +110,11 @@ class ObjectManager extends BaseObjectManager
     }
 
     /**
-     * {@inheritDoc}
+     * Updates some fields in the entity
+     *
+     * @param object $entity
+     * @param array $data
+     * @return object
      */
     function updateObject ($entity, $data)
     {
@@ -75,7 +126,10 @@ class ObjectManager extends BaseObjectManager
     }
 
     /**
-     * {@inheritDoc}
+     * Return a managed entity
+     *
+     * @param object $entity
+     * @return object
      */
     function mergeObject ($entity)
     {
@@ -115,7 +169,10 @@ class ObjectManager extends BaseObjectManager
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the value of a field of the entity
+     *
+     * @param object $entity
+     * @param string $field
      */
     function readObject ($entity, $field)
     {
@@ -125,7 +182,11 @@ class ObjectManager extends BaseObjectManager
     }
 
     /**
-     * {@inheritDoc}
+     * Find the entity referenced by the identifiers in $data
+     *
+     * @param array $identifiers
+     * @param string $className
+     * @return object|null
      */
     function findObject ($identifiers, $className)
     {
@@ -133,7 +194,12 @@ class ObjectManager extends BaseObjectManager
     }
 
     /**
-     * {@inheritDoc}
+     * Returns the array of identifier keys/values that can be used with find()
+     * to find the entity described by $incoming
+     *
+     * If an identifier is a foreignIdentifier, find the foreign entity
+     *
+     * @return array
      */
     function getIdentifierValues ($data, $className)
     {
@@ -176,7 +242,12 @@ class ObjectManager extends BaseObjectManager
     }
 
     /**
-     * {@inheritDoc}
+     * Finds all the foreign keys in $data and the entity associated
+     *
+     * eg ["article_id" => 2134] returns
+     * array([ "associationKey" => "article", "associationValue" => (object Article), "referenceKeys" => [ "article_id"] ])
+     *
+     * @return array
      */
     function findAssociations ($data, $className)
     {
@@ -228,6 +299,10 @@ class ObjectManager extends BaseObjectManager
         ];
     }
 
+    /**
+     * Returns the class name of an entity, even if the object is a Proxy
+     * @param object $entity
+     */
     function getClassName ($entity)
     {
         return $this->entityManager->getClassMetadata(get_class($entity))->rootEntityName;

@@ -32,7 +32,7 @@ class Source
 
     /**
      *
-     * @return string
+     * @return string|null
      */
     function getBreak ()
     {
@@ -41,7 +41,7 @@ class Source
 
     /**
      *
-     * @return string
+     * @return string|null
      */
     function getPath ()
     {
@@ -60,7 +60,7 @@ class Source
     /**
      *
      * @param string $break
-     * @return Source
+     * @return self
      */
     function setBreak ($break)
     {
@@ -72,7 +72,7 @@ class Source
     /**
      *
      * @param string $path
-     * @return Source
+     * @return self
      */
     function setPath ($path)
     {
@@ -84,7 +84,7 @@ class Source
     /**
      *
      * @param string $className
-     * @return Source
+     * @return self
      */
     function setClassName ($className)
     {
@@ -108,7 +108,7 @@ class Source
      *
      * @param string $name
      * @param string $type
-     * @return Source
+     * @return self
      */
     function addProperty ($name, $type)
     {

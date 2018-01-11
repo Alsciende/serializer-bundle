@@ -13,7 +13,6 @@ use UnexpectedValueException;
  */
 class EncodingService
 {
-
     /**
      *
      * @param Block $block
@@ -23,7 +22,7 @@ class EncodingService
     {
         $list = json_decode($block->getData(), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new UnexpectedValueException("Block data cannot be decoded (".json_last_error_msg().") " . $block->getData());
+            throw new UnexpectedValueException("Block data cannot be decoded (" . json_last_error_msg() . ") " . $block->getData());
         }
         $valid = is_array($list) && (count($list) === 0 || array_key_exists(0, $list));
         if ($valid === false) {
@@ -38,6 +37,7 @@ class EncodingService
             $fragment->setBlock($block);
             $fragments[] = $fragment;
         }
+
         return $fragments;
     }
 
@@ -50,20 +50,4 @@ class EncodingService
             throw new \Exception("Discrepancy in " . $block->getPath() . ": value from '" . $break . "': " . $data[$break] . " is different from block name: " . $block->getName());
         }
     }
-
-    /**
-     *
-     * @param Fragment[] $fragments
-     * @return Block
-     */
-    public function encode ($fragments)
-    {
-        $list = [];
-        foreach ($fragments as $fragment) {
-            $list[] = $fragment->getData();
-        }
-        $data = json_encode($list);
-        return new Block($data);
-    }
-
 }

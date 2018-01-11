@@ -2,32 +2,32 @@
 
 namespace Alsciende\SerializerBundle\Service;
 
-use Alsciende\SerializerBundle\Manager\ObjectManagerInterface;
+use Alsciende\SerializerBundle\Manager\ObjectManager;
 
 /**
  * Turns an object into an array
  *
  * @author Alsciende <alsciende@icloud.com>
  */
-class NormalizingService implements NormalizingServiceInterface
+class NormalizingService
 {
 
-    public function __construct (ObjectManagerInterface $objectManager)
+    public function __construct (ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
     }
 
     /**
      *
-     * @var \Alsciende\SerializerBundle\Manager\ObjectManagerInterface
+     * @var \Alsciende\SerializerBundle\Manager\ObjectManager
      */
     private $objectManager;
 
     /**
      *
-     * @param type $entity
-     * @param type $propertyMap
-     * @return type
+     * @param object $entity
+     * @param array $propertyMap
+     * @return array
      */
     public function toArray ($entity, $propertyMap)
     {
@@ -44,10 +44,10 @@ class NormalizingService implements NormalizingServiceInterface
      * with [ "id" => 3, "name" => "The Dark Side of the Moon", "releasedAt" => (DateTime), "band" => (Band) ]
      * does [ "id" => 3, "name" => "The Dark Side of the Moon", "released_at" => "1973-03-01", "band_code" => "pink-floyd" ]
      *
-     * @param type $data
-     * @param type $className
-     * @param type $propertyMap
-     * @return type
+     * @param array $data
+     * @param string $className
+     * @param array $propertyMap
+     * @return array
      */
     public function normalize ($data, $className, $propertyMap)
     {
@@ -91,10 +91,10 @@ class NormalizingService implements NormalizingServiceInterface
      * with [ "id" => 3, "name" => "The Dark Side of the Moon", "released_at" => "1973-03-01", "band_code" => "pink-floyd" ]
      * does [ "id" => 3, "name" => "The Dark Side of the Moon", "releasedAt" => (DateTime), "band" => (Band) ]
      *
-     * @param type $data
-     * @param type $className
-     * @param type $propertyMap
-     * @return type
+     * @param array $data
+     * @param string $className
+     * @param array $propertyMap
+     * @return array
      */
     public function denormalize ($data, $className, $propertyMap)
     {

@@ -18,12 +18,12 @@ class SourceManager
     /* @var array */
     private $ordered;
 
-    /* @var ObjectManagerInterface */
+    /* @var ObjectManager */
     private $objectManager;
 
     private $path;
 
-    public function __construct (ObjectManagerInterface $objectManager, $path)
+    public function __construct (ObjectManager $objectManager, $path)
     {
         $this->objectManager = $objectManager;
         $this->path = $path;
@@ -90,7 +90,7 @@ class SourceManager
      *
      * @param \Alsciende\SerializerBundle\Model\Source[] $sources
      * @param string[] $classes
-     * @return integer
+     * @return integer|null
      */
     public function findNextResolvedSource ($sources, $classes)
     {

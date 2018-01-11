@@ -2,7 +2,7 @@
 
 namespace Alsciende\SerializerBundle\Service;
 
-use Alsciende\SerializerBundle\Manager\ObjectManagerInterface;
+use Alsciende\SerializerBundle\Manager\ObjectManager;
 use Alsciende\SerializerBundle\Model\Source;
 use Doctrine\Common\Annotations\Reader;
 use Psr\Cache\CacheItemPoolInterface;
@@ -18,7 +18,7 @@ class ScanningService
 {
 
     /**
-     * @var ObjectManagerInterface
+     * @var ObjectManager
      */
     private $objectManager;
 
@@ -43,7 +43,7 @@ class ScanningService
     private $path;
 
     public function __construct (
-        ObjectManagerInterface $objectManager,
+        ObjectManager $objectManager,
         SourceOrderingService $orderingService,
         Reader $reader,
         CacheItemPoolInterface $cache,
@@ -115,7 +115,7 @@ class ScanningService
         /* @var $reflectionProperty ReflectionProperty */
         foreach ($reflectionClass->getProperties() as $reflectionProperty) {
             $annotation = $this->reader->getPropertyAnnotation($reflectionProperty, \Alsciende\SerializerBundle\Annotation\Source::class);
-            if ($annotation) {
+            if ($annotation && isset($annotation->type)) {
                 $source->addProperty($reflectionProperty->name, $annotation->type);
             }
         }

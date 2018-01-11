@@ -2,7 +2,7 @@
 
 namespace Alsciende\SerializerBundle\Service;
 
-use Alsciende\SerializerBundle\Manager\ObjectManagerInterface;
+use Alsciende\SerializerBundle\Manager\ObjectManager;
 use Alsciende\SerializerBundle\Model\Source;
 use InvalidArgumentException;
 
@@ -13,7 +13,10 @@ use InvalidArgumentException;
  */
 class SourceOrderingService
 {
-    public function __construct (ObjectManagerInterface $objectManager)
+    /** @var ObjectManager $objectManager */
+    private $objectManager;
+
+    public function __construct (ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
     }
@@ -21,6 +24,8 @@ class SourceOrderingService
     /**
      * Order Sources by dependencies
      * Sources can only depend on Sources before them in the list
+     *
+     * @param Source[] $sources
      */
     public function orderSources ($sources)
     {
@@ -50,7 +55,7 @@ class SourceOrderingService
      *
      * @param Source[] $sources
      * @param string[] $classes
-     * @return integer
+     * @return integer|null
      */
     protected function findNextResolvedSource ($sources, $classes)
     {

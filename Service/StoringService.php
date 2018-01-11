@@ -18,7 +18,7 @@ class StoringService
      * Retrieve Blocks from a Source configuration
      *
      * @param Source $source
-     * @return Block
+     * @return Block[]|null
      */
     public function retrieve (Source $source)
     {
@@ -30,7 +30,7 @@ class StoringService
             if (file_exists("$path.json") and is_file("$path.json")) {
                 $blocks = $this->scanFile("$path.json");
             } else {
-                return;
+                return null;
             }
         } else {
             if (file_exists("$path") and is_dir("$path")) {
@@ -66,7 +66,7 @@ class StoringService
     /**
      *
      * @param string $path
-     * @return Block
+     * @return Block[]
      */
     public function scanFile ($path)
     {

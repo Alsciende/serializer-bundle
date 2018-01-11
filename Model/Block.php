@@ -18,7 +18,7 @@ class Block
     private $source;
 
     /**
-     * @var string
+     * @var string|null
      */
     private $path;
 
@@ -35,7 +35,7 @@ class Block
     /**
      *
      * @param string $data
-     * @param string $path
+     * @param string|null $path
      */
     function __construct ($data, $path = null)
     {
@@ -57,7 +57,7 @@ class Block
 
     /**
      *
-     * @return string
+     * @return string|null
      */
     function getPath ()
     {
@@ -97,7 +97,7 @@ class Block
     /**
      *
      * @param string $path
-     * @return Source
+     * @return self
      */
     function setPath ($path)
     {
@@ -109,7 +109,7 @@ class Block
     /**
      *
      * @param string $data
-     * @return Source
+     * @return self
      */
     function setData ($data)
     {
@@ -121,7 +121,7 @@ class Block
     /**
      *
      * @param string $name
-     * @return Source
+     * @return self
      */
     function setName ($name)
     {
