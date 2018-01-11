@@ -1,0 +1,22 @@
+{
+  "name": "alsciende/serializer-bundle",
+  "type": "symfony/bundle",
+  "description": "Alsciende SerializerBundle",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Cédric Bertolini",
+      "email": "bertolini.cedric@me.com"
+    }
+  ],
+  "require": {
+    "php": ">=5.6.0",
+    "doctrine/orm": "^2.6"
+  },
+  "autoload": {
+    "psr-4": { "Alsciende\\SerializerBundle\\": "" }
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^6.5"
+  }
+}
