@@ -15,7 +15,10 @@
     "symfony/framework-bundle": "~3.0|~4.0"
   },
   "autoload": {
-    "psr-4": { "Alsciende\\SerializerBundle\\": "" }
+    "psr-4": { "Alsciende\\SerializerBundle\\": "src/" }
+  },
+  "autoload-dev": {
+    "psr-4": { "Alsciende\\SerializerBundle\\Test\\": "tests/" }
   },
   "require-dev": {
     "phpunit/phpunit": "^6.5",

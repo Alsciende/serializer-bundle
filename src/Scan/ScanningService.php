@@ -29,29 +29,29 @@ class ScanningService
     /** @var CacheItemPoolInterface $cache */
     private $cache;
 
-    /** @var string $path */
+    /** @var string|null $path */
     private $path;
 
     public function __construct (
         ObjectManager $objectManager,
         SourceOrderingService $orderingService,
         Reader $reader,
-        CacheItemPoolInterface $cache,
-        $path
+        CacheItemPoolInterface $cache
     ) {
         $this->objectManager = $objectManager;
         $this->orderingService = $orderingService;
         $this->reader = $reader;
         $this->cache = $cache;
-        $this->path = $path;
     }
 
     /**
      *
      * @return Source[]
      */
-    public function findSources ()
+    public function findSources ($path = null)
     {
+        $this->path = $path;
+
         $sources = [];
 
         foreach ($this->objectManager->getAllManagedClassNames() as $className) {
@@ -65,22 +65,10 @@ class ScanningService
 
     /**
      *
-     * @param object $entity
-     * @return Source
-     */
-    public function buildFromEntity ($entity)
-    {
-        $className = $this->objectManager->getClassName($entity);
-
-        return $this->buildFromClass($className);
-    }
-
-    /**
-     *
      * @param string $className
      * @return Source
      */
-    public function buildFromClass ($className)
+    private function buildFromClass ($className)
     {
         $cacheKey = $this->getCacheKey($className);
         $cacheItem = $this->cache->getItem($cacheKey);
@@ -99,7 +87,7 @@ class ScanningService
         }
     }
 
-    protected function buildSource (\Alsciende\SerializerBundle\Annotation\Source $annotation, \ReflectionClass $reflectionClass)
+    private function buildSource (\Alsciende\SerializerBundle\Annotation\Source $annotation, \ReflectionClass $reflectionClass)
     {
         $path = $annotation->path ?: $this->path;
         $source = new Source($reflectionClass->getName(), $path, $annotation->break);
@@ -115,7 +103,7 @@ class ScanningService
         return $source;
     }
 
-    protected function getCacheKey ($className)
+    private function getCacheKey ($className)
     {
         return "alsciende_serializer.source." . strtr($className, '\\', '_');
     }

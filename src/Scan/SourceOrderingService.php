@@ -57,7 +57,7 @@ class SourceOrderingService
      * @param string[] $classes
      * @return integer|null
      */
-    protected function findNextResolvedSource ($sources, $classes)
+    private function findNextResolvedSource ($sources, $classes)
     {
         foreach ($sources as $index => $source) {
             $resolved = $this->allTargetEntitiesAreKnown($source->getClassName(), $classes);
@@ -76,7 +76,7 @@ class SourceOrderingService
      * @param string[] $classes
      * @return boolean
      */
-    protected function allTargetEntitiesAreKnown ($className, $classes)
+    private function allTargetEntitiesAreKnown ($className, $classes)
     {
         $dependencies = $this->objectManager->getAllTargetClasses($className);
         foreach (array_values($dependencies) as $dependency) {

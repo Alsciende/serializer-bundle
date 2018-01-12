@@ -6,7 +6,7 @@
  * Time: 13:53
  */
 
-namespace Tests\Resources\Entity;
+namespace Alsciende\SerializerBundle\Test\Resources\Entity;
 
 /**
  */

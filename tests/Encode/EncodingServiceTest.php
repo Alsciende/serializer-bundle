@@ -6,14 +6,14 @@
  * Time: 16:29
  */
 
-namespace Tests\Service;
+namespace Alsciende\SerializerBundle\Test\Service;
 
 use Alsciende\SerializerBundle\Model\Block;
 use Alsciende\SerializerBundle\Model\Fragment;
 use Alsciende\SerializerBundle\Model\Source;
 use Alsciende\SerializerBundle\Encode\EncodingService;
 use PHPUnit\Framework\TestCase;
-use Tests\Resources\Entity\Artist;
+use Alsciende\SerializerBundle\Test\Resources\Entity\Artist;
 
 /**
  * @covers EncodingService
