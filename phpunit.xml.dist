@@ -9,23 +9,18 @@
          stopOnFailure="false"
          syntaxCheck="false"
          colors="true"
-         bootstrap="Tests/bootstrap.php"
+         bootstrap="tests/bootstrap.php"
 >
 
     <testsuites>
         <testsuite name="Alsciende SerializerBundle Test Suite">
-            <directory>./Tests</directory>
+            <directory>./tests</directory>
         </testsuite>
     </testsuites>
 
     <filter>
         <whitelist>
-            <directory>Annotation</directory>
-            <directory>DependencyInjection</directory>
-            <directory>Manager</directory>
-            <directory>Model</directory>
-            <directory>Serializer</directory>
-            <directory>Services</directory>
+            <directory>src</directory>
         </whitelist>
     </filter>
 

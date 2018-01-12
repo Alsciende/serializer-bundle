@@ -31,14 +31,7 @@ vendor: composer.lock
 phpstan: export SYMFONY_ENV = test
 phpstan: vendor
 	@echo
-	$(PHP_BIN) vendor/bin/phpstan analyse \
-	Annotation \
-	Manager \
-	Model \
-	Resources \
-	Serializer \
-	Service \
-	--level 7
+	$(PHP_BIN) vendor/bin/phpstan analyse src --configuration phpstan.neon --level 7
 
 test: export SYMFONY_ENV = test
 test: phpstan phpunit
