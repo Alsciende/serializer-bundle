@@ -33,11 +33,14 @@ phpstan: vendor
 	@echo
 	$(PHP_BIN) vendor/bin/phpstan analyse \
 	Annotation \
-	Manager \
+	Doctrine \
+	Encode \
 	Model \
+	Normalize \
 	Resources \
-	Serializer \
-	Service \
+	Scan \
+	Store \
+	Serializer.php \
 	--level 7
 
 test: export SYMFONY_ENV = test

@@ -1,6 +1,6 @@
 <?php
 
-namespace Alsciende\SerializerBundle\Manager;
+namespace Alsciende\SerializerBundle\Doctrine;
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -11,6 +11,14 @@ use Doctrine\ORM\EntityManagerInterface;
  */
 class ObjectManager
 {
+    /* @var \Doctrine\ORM\EntityManager $entityManager */
+    private $entityManager;
+
+    function __construct (EntityManagerInterface $entityManager)
+    {
+        $this->entityManager = $entityManager;
+    }
+
     /**
      * Find the entity referenced by the identifiers in $data, or create a new one with the correct identifiers
      *
@@ -52,14 +60,6 @@ class ObjectManager
         $referenceKey = $associationKey . '_' . $targetIdentifier;
 
         return [$referenceKey, $referenceValue];
-    }
-
-    /* @var \Doctrine\ORM\EntityManager */
-    private $entityManager;
-
-    function __construct (EntityManagerInterface $entityManager)
-    {
-        $this->entityManager = $entityManager;
     }
 
     /**

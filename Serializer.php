@@ -1,15 +1,14 @@
 <?php
 
-namespace Alsciende\SerializerBundle\Serializer;
+namespace Alsciende\SerializerBundle;
 
-use Alsciende\SerializerBundle\Manager\ObjectManager;
+use Alsciende\SerializerBundle\Doctrine\ObjectManager;
+use Alsciende\SerializerBundle\Encode\EncodingService;
 use Alsciende\SerializerBundle\Model\Block;
 use Alsciende\SerializerBundle\Model\Fragment;
 use Alsciende\SerializerBundle\Model\Source;
-use Alsciende\SerializerBundle\Service\EncodingService;
-use Alsciende\SerializerBundle\Service\NormalizingService;
-use Alsciende\SerializerBundle\Service\StoringService;
-use Exception;
+use Alsciende\SerializerBundle\Normalize\NormalizingService;
+use Alsciende\SerializerBundle\Store\StoringService;
 
 /**
  * Description of Serializer
@@ -18,6 +17,17 @@ use Exception;
  */
 class Serializer
 {
+    /** @var StoringService $storingService */
+    private $storingService;
+
+    /** @var EncodingService $encodingService */
+    private $encodingService;
+
+    /** @var NormalizingService $normalizingService */
+    private $normalizingService;
+
+    /** @var ObjectManager $objectManager */
+    private $objectManager;
 
     public function __construct (
         StoringService $storingService,
@@ -30,26 +40,6 @@ class Serializer
         $this->normalizingService = $normalizingService;
         $this->objectManager = $objectManager;
     }
-
-    /**
-     * @var StoringService
-     */
-    private $storingService;
-
-    /**
-     * @var EncodingService
-     */
-    private $encodingService;
-
-    /**
-     * @var NormalizingService
-     */
-    private $normalizingService;
-
-    /**
-     * @var ObjectManager
-     */
-    private $objectManager;
 
     /**
      *
@@ -88,7 +78,6 @@ class Serializer
     /**
      *
      * @param Fragment $fragment
-     * @throws Exception
      * @return array
      */
     public function importFragment (Fragment $fragment)

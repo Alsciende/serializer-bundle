@@ -1,8 +1,8 @@
 <?php
 
-namespace Alsciende\SerializerBundle\Service;
+namespace Alsciende\SerializerBundle\Scan;
 
-use Alsciende\SerializerBundle\Manager\ObjectManager;
+use Alsciende\SerializerBundle\Doctrine\ObjectManager;
 use Alsciende\SerializerBundle\Model\Source;
 use InvalidArgumentException;
 

@@ -1,6 +1,6 @@
 <?php
 
-namespace Alsciende\SerializerBundle\Service;
+namespace Alsciende\SerializerBundle\Store;
 
 use Alsciende\SerializerBundle\Model\Block;
 use Alsciende\SerializerBundle\Model\Source;

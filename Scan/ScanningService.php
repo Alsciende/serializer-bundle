@@ -1,8 +1,8 @@
 <?php
 
-namespace Alsciende\SerializerBundle\Service;
+namespace Alsciende\SerializerBundle\Scan;
 
-use Alsciende\SerializerBundle\Manager\ObjectManager;
+use Alsciende\SerializerBundle\Doctrine\ObjectManager;
 use Alsciende\SerializerBundle\Model\Source;
 use Doctrine\Common\Annotations\Reader;
 use Psr\Cache\CacheItemPoolInterface;
@@ -17,29 +17,19 @@ use ReflectionProperty;
 class ScanningService
 {
 
-    /**
-     * @var ObjectManager
-     */
+    /** @var ObjectManager $objectManager */
     private $objectManager;
 
-    /**
-     * @var SourceOrderingService
-     */
+    /** @var SourceOrderingService $orderingService */
     private $orderingService;
 
-    /**
-     * @var \Doctrine\Common\Annotations\Reader
-     */
+    /** @var Reader $reader */
     private $reader;
 
-    /**
-     * @var \Psr\Cache\CacheItemPoolInterface
-     */
+    /** @var CacheItemPoolInterface $cache */
     private $cache;
 
-    /**
-     * @var string
-     */
+    /** @var string $path */
     private $path;
 
     public function __construct (

@@ -1,8 +1,9 @@
 <?php
 
-namespace Alsciende\SerializerBundle\Service;
+namespace Alsciende\SerializerBundle\Normalize;
 
-use Alsciende\SerializerBundle\Manager\ObjectManager;
+use Alsciende\SerializerBundle\Doctrine\ObjectManager;
+
 
 /**
  * Turns an object into an array
@@ -11,17 +12,13 @@ use Alsciende\SerializerBundle\Manager\ObjectManager;
  */
 class NormalizingService
 {
+    /** @var ObjectManager $objectManager */
+    private $objectManager;
 
     public function __construct (ObjectManager $objectManager)
     {
         $this->objectManager = $objectManager;
     }
-
-    /**
-     *
-     * @var \Alsciende\SerializerBundle\Manager\ObjectManager
-     */
-    private $objectManager;
 
     /**
      *

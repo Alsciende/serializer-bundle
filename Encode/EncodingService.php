@@ -1,6 +1,6 @@
 <?php
 
-namespace Alsciende\SerializerBundle\Service;
+namespace Alsciende\SerializerBundle\Encode;
 
 use Alsciende\SerializerBundle\Model\Block;
 use Alsciende\SerializerBundle\Model\Fragment;

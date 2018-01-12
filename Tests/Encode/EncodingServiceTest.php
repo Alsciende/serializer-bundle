@@ -11,7 +11,7 @@ namespace Tests\Service;
 use Alsciende\SerializerBundle\Model\Block;
 use Alsciende\SerializerBundle\Model\Fragment;
 use Alsciende\SerializerBundle\Model\Source;
-use Alsciende\SerializerBundle\Service\EncodingService;
+use Alsciende\SerializerBundle\Encode\EncodingService;
 use PHPUnit\Framework\TestCase;
 use Tests\Resources\Entity\Artist;
 
