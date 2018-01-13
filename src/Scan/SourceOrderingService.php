@@ -26,6 +26,7 @@ class SourceOrderingService
      * Sources can only depend on Sources before them in the list
      *
      * @param Source[] $sources
+     * @return Source[]
      */
     public function orderSources ($sources)
     {

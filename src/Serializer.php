@@ -97,7 +97,6 @@ class Serializer
         $result['original'] = $this->getOriginal($entity, $array);
 
         // update the entity with the values of the denormalized array
-
         $this->objectManager->updateObject($entity, $array);
         $this->objectManager->mergeObject($entity);
         $result['entity'] = $entity;

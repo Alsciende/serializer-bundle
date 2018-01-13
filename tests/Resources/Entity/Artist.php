@@ -21,17 +21,16 @@ class Artist
     /**
      * @return int
      */
-    public function getId (): int
+    public function getId ()
     {
         return $this->id;
     }
 
     /**
-     * @param int $id
-     *
-     * @return self
+     * @param $id
+     * @return $this
      */
-    public function setId (int $id): self
+    public function setId ($id)
     {
         $this->id = $id;
 
@@ -41,17 +40,16 @@ class Artist
     /**
      * @return string
      */
-    public function getName (): string
+    public function getName ()
     {
         return $this->name;
     }
 
     /**
-     * @param string $name
-     *
-     * @return self
+     * @param $name
+     * @return $this
      */
-    public function setName (string $name): self
+    public function setName ($name)
     {
         $this->name = $name;
 

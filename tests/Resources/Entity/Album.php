@@ -24,48 +24,76 @@ class Album
     /** @var Label */
     private $label;
 
-    public function getId (): int
+    /**
+     * @return int
+     */
+    public function getId ()
     {
         return $this->id;
     }
 
-    public function setId (int $id): self
+    /**
+     * @param $id
+     * @return $this
+     */
+    public function setId ($id)
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getName (): string
+    /**
+     * @return string
+     */
+    public function getName ()
     {
         return $this->name;
     }
 
-    public function setName (string $name): self
+    /**
+     * @param $name
+     * @return $this
+     */
+    public function setName ($name)
     {
         $this->name = $name;
 
         return $this;
     }
 
-    public function getArtist (): Artist
+    /**
+     * @return Artist
+     */
+    public function getArtist ()
     {
         return $this->artist;
     }
 
-    public function setArtist (Artist $artist): self
+    /**
+     * @param $artist
+     * @return $this
+     */
+    public function setArtist ($artist)
     {
         $this->artist = $artist;
 
         return $this;
     }
 
-    public function getLabel (): Label
+    /**
+     * @return Label
+     */
+    public function getLabel ()
     {
         return $this->label;
     }
 
-    public function setLabel (Label $label): self
+    /**
+     * @param $label
+     * @return $this
+     */
+    public function setLabel ($label)
     {
         $this->label = $label;
 

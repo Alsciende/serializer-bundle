@@ -18,24 +18,38 @@ class Label
     /** @var string */
     private $name;
 
-    public function getId (): int
+    /**
+     * @return int
+     */
+    public function getId ()
     {
         return $this->id;
     }
 
-    public function setId (int $id): self
+    /**
+     * @param $id
+     * @return $this
+     */
+    public function setId ($id)
     {
         $this->id = $id;
 
         return $this;
     }
 
-    public function getName (): string
+    /**
+     * @return string
+     */
+    public function getName ()
     {
         return $this->name;
     }
 
-    public function setName (string $name): self
+    /**
+     * @param $name
+     * @return $this
+     */
+    public function setName ($name)
     {
         $this->name = $name;
 

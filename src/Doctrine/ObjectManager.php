@@ -43,7 +43,7 @@ class ObjectManager
     }
 
     /**
-     * Return the reference corresponding to the assocation in the entity
+     * Return the reference corresponding to the association in the entity
      *
      * @param string $targetClass
      * @param string $associationKey
@@ -103,6 +103,7 @@ class ObjectManager
      * using a composite key
      *
      * @param string $className
+     * @return string
      */
     function getSingleIdentifier ($className)
     {
@@ -129,6 +130,8 @@ class ObjectManager
         foreach ($data as $field => $value) {
             $classMetadata->setFieldValue($entity, $field, $value);
         }
+
+        return $entity;
     }
 
     /**
@@ -165,6 +168,8 @@ class ObjectManager
         if ($association) {
             return $association['associationValue'];
         }
+
+        throw new \RuntimeException('No such field.');
     }
 
     function setAssociationValue (&$result, $className, $fieldName, $value)
@@ -180,6 +185,7 @@ class ObjectManager
      *
      * @param object $entity
      * @param string $field
+     * @return mixed
      */
     function readObject ($entity, $field)
     {
@@ -207,6 +213,8 @@ class ObjectManager
      *
      * If an identifier is a foreignIdentifier, find the foreign entity
      *
+     * @param array $data
+     * @param string $className
      * @return array
      */
     function getIdentifierValues ($data, $className)
@@ -258,6 +266,8 @@ class ObjectManager
      * eg ["article_id" => 2134] returns
      * array([ "associationKey" => "article", "associationValue" => (object Article), "referenceKeys" => [ "article_id"] ])
      *
+     * @param array $data
+     * @param string $className
      * @return array
      */
     function findAssociations ($data, $className)
@@ -313,6 +323,7 @@ class ObjectManager
     /**
      * Returns the class name of an entity, even if the object is a Proxy
      * @param object $entity
+     * @return string
      */
     function getClassName ($entity)
     {

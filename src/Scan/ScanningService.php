@@ -45,7 +45,7 @@ class ScanningService
     }
 
     /**
-     *
+     * @param null $path
      * @return Source[]
      */
     public function findSources ($path = null)
@@ -66,7 +66,7 @@ class ScanningService
     /**
      *
      * @param string $className
-     * @return Source
+     * @return Source|null
      */
     private function buildFromClass ($className)
     {
@@ -85,6 +85,8 @@ class ScanningService
 
             return $source;
         }
+
+        return null;
     }
 
     private function buildSource (\Alsciende\SerializerBundle\Annotation\Source $annotation, \ReflectionClass $reflectionClass)
