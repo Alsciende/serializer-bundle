@@ -58,4 +58,21 @@ class ScanningServiceTest extends TestCase
 
         $this->assertNull($result);
     }
+
+    public function testFindSources()
+    {
+        $annotationReader = new AnnotationReader();
+        $metadataService = $this->getMetadataServiceStub();
+
+        $service = new ScanningService($metadataService, $annotationReader);
+        $result = $service->findSources();
+
+        $this->assertNotEmpty($result);
+        $this->assertArrayHasKey(0, $result);
+        $this->assertInstanceOf(Source::class, $result[0]);
+        $this->assertEquals(Artist::class, $result[0]->getClassName());
+        $this->assertEmpty($result[0]->getPath());
+        $this->assertEmpty($result[0]->getBreak());
+        $this->assertEquals(["id" => "string", "name" => "string"], $result[0]->getProperties());
+    }
 }
