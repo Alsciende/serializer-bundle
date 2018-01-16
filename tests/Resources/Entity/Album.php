@@ -12,20 +12,28 @@ namespace Alsciende\SerializerBundle\Test\Resources\Entity;
  */
 class Album
 {
-    /** @var int */
+    /**
+     * @var string
+     */
     private $id;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $name;
 
-    /** @var Artist */
+    /**
+     * @var Artist
+     */
     private $artist;
 
-    /** @var Label */
+    /**
+     * @var Label
+     */
     private $label;
 
     /**
-     * @return int
+     * @return string
      */
     public function getId ()
     {
@@ -33,7 +41,7 @@ class Album
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @return $this
      */
     public function setId ($id)
@@ -52,7 +60,7 @@ class Album
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return $this
      */
     public function setName ($name)

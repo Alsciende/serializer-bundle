@@ -5,16 +5,15 @@ namespace Alsciende\SerializerBundle\Annotation;
 use Doctrine\Common\Annotations\Annotation;
 
 /**
- * @Source annotation
+ * @Skizzle annotation
  *
  * @Annotation
  * @Target({"CLASS","PROPERTY"})
  *
  * @author Alsciende <alsciende@icloud.com>
  */
-class Source extends Annotation
+class Skizzle extends Annotation
 {
-
     /* @var string */
     public $break;
 

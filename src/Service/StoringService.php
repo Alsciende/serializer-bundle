@@ -1,10 +1,9 @@
 <?php
 
-namespace Alsciende\SerializerBundle\Store;
+namespace Alsciende\SerializerBundle\Service;
 
 use Alsciende\SerializerBundle\Model\Block;
 use Alsciende\SerializerBundle\Model\Source;
-use Exception;
 
 /**
  * Turns a string into a file
@@ -36,7 +35,7 @@ class StoringService
             if (file_exists("$path") and is_dir("$path")) {
                 $blocks = $this->scanDirectory("$path");
             } else {
-                throw new Exception("Directory $path not found");
+                throw new \Exception("Directory $path not found");
             }
         }
 

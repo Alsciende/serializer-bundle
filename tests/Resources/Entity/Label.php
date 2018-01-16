@@ -12,14 +12,18 @@ namespace Alsciende\SerializerBundle\Test\Resources\Entity;
  */
 class Label
 {
-    /** @var int */
+    /**
+     * @var string
+     */
     private $id;
 
-    /** @var string */
+    /**
+     * @var string
+     */
     private $name;
 
     /**
-     * @return int
+     * @return string
      */
     public function getId ()
     {
@@ -27,7 +31,7 @@ class Label
     }
 
     /**
-     * @param $id
+     * @param string $id
      * @return $this
      */
     public function setId ($id)
@@ -46,7 +50,7 @@ class Label
     }
 
     /**
-     * @param $name
+     * @param string $name
      * @return $this
      */
     public function setName ($name)

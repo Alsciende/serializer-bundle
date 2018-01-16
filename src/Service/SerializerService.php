@@ -1,21 +1,17 @@
 <?php
 
-namespace Alsciende\SerializerBundle;
+namespace Alsciende\SerializerBundle\Service;
 
-use Alsciende\SerializerBundle\Doctrine\ObjectManager;
-use Alsciende\SerializerBundle\Encode\EncodingService;
 use Alsciende\SerializerBundle\Model\Block;
 use Alsciende\SerializerBundle\Model\Fragment;
 use Alsciende\SerializerBundle\Model\Source;
-use Alsciende\SerializerBundle\Normalize\NormalizingService;
-use Alsciende\SerializerBundle\Store\StoringService;
 
 /**
  * Description of Serializer
  *
  * @author Alsciende <alsciende@icloud.com>
  */
-class Serializer
+class SerializerService
 {
     /** @var StoringService $storingService */
     private $storingService;

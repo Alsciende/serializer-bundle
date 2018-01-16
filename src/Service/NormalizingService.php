@@ -1,8 +1,6 @@
 <?php
 
-namespace Alsciende\SerializerBundle\Normalize;
-
-use Alsciende\SerializerBundle\Doctrine\ObjectManager;
+namespace Alsciende\SerializerBundle\Service;
 
 
 /**

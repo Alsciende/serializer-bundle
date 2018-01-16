@@ -1,6 +1,6 @@
 services:
-    Alsciende\SerializerBundle\:
-        resource: '../../../src/*'
+    Alsciende\SerializerBundle\Service\:
+        resource: '../../../src/Service/*'
         autowire: true
         autoconfigure: true
         public: false

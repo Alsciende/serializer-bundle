@@ -1,6 +1,6 @@
 <?php
 
-namespace Alsciende\SerializerBundle\Doctrine;
+namespace Alsciende\SerializerBundle\Service;
 
 use Doctrine\ORM\EntityManagerInterface;
 
@@ -43,7 +43,7 @@ class ObjectManager
     }
 
     /**
-     * Return the reference corresponding to the association in the entity
+     * Return the reference corresponding to the assocation in the entity
      *
      * @param string $targetClass
      * @param string $associationKey
@@ -60,42 +60,6 @@ class ObjectManager
         $referenceKey = $associationKey . '_' . $targetIdentifier;
 
         return [$referenceKey, $referenceValue];
-    }
-
-    /**
-     * Returns an array of foreign key => foreign entity class
-     * for all classes that this class depends on
-     *
-     * @param string $className
-     * @return string[]
-     */
-    function getAllTargetClasses ($className)
-    {
-        $result = [];
-        $classMetadata = $this->entityManager->getClassMetadata($className);
-        foreach ($classMetadata->getAssociationMappings() as $mapping) {
-            if ($mapping['isOwningSide']) {
-                $result[$mapping['fieldName']] = $mapping['targetEntity'];
-            }
-        }
-
-        return $result;
-    }
-
-    /**
-     * Returns a list of all classes
-     *
-     * @return string[]
-     */
-    function getAllManagedClassNames ()
-    {
-        $result = [];
-        $allMetadata = $this->entityManager->getMetadataFactory()->getAllMetadata();
-        foreach ($allMetadata as $metadata) {
-            $result[] = $metadata->getName();
-        }
-
-        return $result;
     }
 
     /**
@@ -267,7 +231,6 @@ class ObjectManager
      * array([ "associationKey" => "article", "associationValue" => (object Article), "referenceKeys" => [ "article_id"] ])
      *
      * @param array $data
-     * @param string $className
      * @return array
      */
     function findAssociations ($data, $className)

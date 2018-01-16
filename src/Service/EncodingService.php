@@ -1,10 +1,9 @@
 <?php
 
-namespace Alsciende\SerializerBundle\Encode;
+namespace Alsciende\SerializerBundle\Service;
 
 use Alsciende\SerializerBundle\Model\Block;
 use Alsciende\SerializerBundle\Model\Fragment;
-use UnexpectedValueException;
 
 /**
  * Turns an array into a string
@@ -22,11 +21,11 @@ class EncodingService
     {
         $list = json_decode($block->getData(), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new UnexpectedValueException("Block data cannot be decoded (" . json_last_error_msg() . ") " . $block->getData());
+            throw new \UnexpectedValueException("Block data cannot be decoded (" . json_last_error_msg() . ") " . $block->getData());
         }
         $valid = is_array($list) && (count($list) === 0 || array_key_exists(0, $list));
         if ($valid === false) {
-            throw new UnexpectedValueException("Block data cannot be decoded to a numeric array: " . $block->getData());
+            throw new \UnexpectedValueException("Block data cannot be decoded to a numeric array: " . $block->getData());
         }
         $fragments = [];
         foreach ($list as $data) {
