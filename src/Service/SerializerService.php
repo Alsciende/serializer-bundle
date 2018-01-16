@@ -40,13 +40,14 @@ class SerializerService
     /**
      *
      * @param Source $source
+     * @param string $defaultPath
      * @return array
      */
-    public function importSource (Source $source)
+    public function importSource (Source $source, $defaultPath)
     {
         $result = [];
 
-        $blocks = $this->storingService->retrieve($source);
+        $blocks = $this->storingService->retrieve($source, $defaultPath);
         if ($blocks) {
             foreach ($blocks as $block) {
                 $result = array_merge($result, $this->importBlock($block));

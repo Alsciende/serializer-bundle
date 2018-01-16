@@ -17,13 +17,14 @@ class StoringService
      * Retrieve Blocks from a Source configuration
      *
      * @param Source $source
+     * @param string|null $defaultPath
      * @return Block[]|null
      */
-    public function retrieve (Source $source)
+    public function retrieve (Source $source, $defaultPath = null)
     {
 
         $parts = explode('\\', $source->getClassName());
-        $path = $source->getPath() . "/" . array_pop($parts);
+        $path = ($source->getPath() ?: $defaultPath) . "/" . array_pop($parts);
 
         if ($source->getBreak() === null) {
             if (file_exists("$path.json") and is_file("$path.json")) {

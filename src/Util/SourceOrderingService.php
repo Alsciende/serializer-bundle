@@ -86,7 +86,7 @@ class SourceOrderingService
     }
 
     /**
-     * @param $sources
+     * @param array $sources
      * @return \InvalidArgumentException
      */
     private function createDependencyCycleException ($sources)

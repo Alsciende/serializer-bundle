@@ -10,10 +10,10 @@ namespace Alsciende\SerializerBundle\Model;
 class Source
 {
 
-    /* @var string */
+    /* @var string|null */
     private $break;
 
-    /* @var string */
+    /* @var string|null */
     private $path;
 
     /* @var string */
@@ -22,7 +22,7 @@ class Source
     /* @var array */
     private $properties;
 
-    function __construct ($className, $path, $break = null)
+    function __construct ($className, $path = null, $break = null)
     {
         $this->className = $className;
         $this->path = $path;
@@ -55,42 +55,6 @@ class Source
     function getClassName ()
     {
         return $this->className;
-    }
-
-    /**
-     *
-     * @param string $break
-     * @return self
-     */
-    function setBreak ($break)
-    {
-        $this->break = $break;
-
-        return $this;
-    }
-
-    /**
-     *
-     * @param string $path
-     * @return self
-     */
-    function setPath ($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     *
-     * @param string $className
-     * @return self
-     */
-    function setClassName ($className)
-    {
-        $this->className = $className;
-
-        return $this;
     }
 
     /**
