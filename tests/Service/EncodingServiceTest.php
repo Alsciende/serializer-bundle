@@ -27,7 +27,7 @@ class EncodingServiceTest extends TestCase
      */
     public function testDecode()
     {
-        $source = new Source(Artist::class, __DIR__ . '/../Resources/data');
+        $source = new Source(Artist::class);
 
         $block = new Block('[{"id":"pink-floyd","name":"Pink Floyd"}]');
         $block->setSource($source);

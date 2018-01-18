@@ -33,7 +33,6 @@ class StoringServiceTest extends TestCase
         $this->assertInstanceOf(Block::class, $result[0]);
         $this->assertEmpty($result[0]->getSource());
         $this->assertEquals('Artist', $result[0]->getName());
-        $this->assertNotEmpty($result[0]->getPath());
         $this->assertNotEmpty($result[0]->getData());
     }
 
@@ -56,8 +55,8 @@ class StoringServiceTest extends TestCase
     public function testRetrieveWithoutBreak()
     {
         $service = new StoringService();
-        $source = new Source(Artist::class, __DIR__ . '/../Resources/data');
-        $result = $service->retrieve($source);
+        $source = new Source(Artist::class);
+        $result = $service->retrieve($source, __DIR__ . '/../Resources/data');
 
         $this->assertInternalType('array', $result);
         $this->assertNotEmpty($result);
@@ -66,7 +65,6 @@ class StoringServiceTest extends TestCase
         $this->assertInstanceOf(Block::class, $result[0]);
         $this->assertEquals($source, $result[0]->getSource());
         $this->assertEquals('Artist', $result[0]->getName());
-        $this->assertNotEmpty($result[0]->getPath());
         $this->assertNotEmpty($result[0]->getData());
     }
 
@@ -76,8 +74,8 @@ class StoringServiceTest extends TestCase
     public function testRetrieveWithBreak()
     {
         $service = new StoringService();
-        $source = new Source(Album::class, __DIR__ . '/../Resources/data', 'Album');
-        $result = $service->retrieve($source);
+        $source = new Source(Album::class, 'Album');
+        $result = $service->retrieve($source, __DIR__ . '/../Resources/data');
 
         $this->assertInternalType('array', $result);
         $this->assertNotEmpty($result);
@@ -86,7 +84,6 @@ class StoringServiceTest extends TestCase
         $this->assertInstanceOf(Block::class, $result[0]);
         $this->assertEquals($source, $result[0]->getSource());
         $this->assertEquals('pink-floyd', $result[0]->getName());
-        $this->assertNotEmpty($result[0]->getPath());
         $this->assertNotEmpty($result[0]->getData());
     }
 }

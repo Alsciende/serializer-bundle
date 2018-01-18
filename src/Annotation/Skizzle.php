@@ -18,9 +18,4 @@ class Skizzle extends Annotation
      * @var string
      */
     public $break;
-
-    /**
-     * @var string
-     */
-    public $path;
 }

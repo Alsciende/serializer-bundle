@@ -5,6 +5,7 @@ namespace Alsciende\SerializerBundle\Test\Service;
 use Alsciende\SerializerBundle\Model\Source;
 use Alsciende\SerializerBundle\Service\MetadataService;
 use Alsciende\SerializerBundle\Service\ScanningService;
+use Alsciende\SerializerBundle\Test\Resources\Entity\Album;
 use Alsciende\SerializerBundle\Test\Resources\Entity\Other;
 use Alsciende\SerializerBundle\Test\Resources\Entity\Artist;
 use Doctrine\Common\Annotations\AnnotationReader;
@@ -33,7 +34,7 @@ class ScanningServiceTest extends TestCase
         return $stub;
     }
 
-    public function testBuildFromClassManaged()
+    public function testBuildFromClassArtist()
     {
         $annotationReader = new AnnotationReader();
         $metadataService = $this->getMetadataServiceStub();
@@ -43,9 +44,22 @@ class ScanningServiceTest extends TestCase
 
         $this->assertInstanceOf(Source::class, $result);
         $this->assertEquals(Artist::class, $result->getClassName());
-        $this->assertEmpty($result->getPath());
         $this->assertEmpty($result->getBreak());
         $this->assertEquals(["id" => "string", "name" => "string"], $result->getProperties());
+    }
+
+    public function testBuildFromClassAlbum()
+    {
+        $annotationReader = new AnnotationReader();
+        $metadataService = $this->getMetadataServiceStub();
+
+        $service = new ScanningService($metadataService, $annotationReader);
+        $result = $service->buildFromClass(Album::class);
+
+        $this->assertInstanceOf(Source::class, $result);
+        $this->assertEquals(Album::class, $result->getClassName());
+        $this->assertEquals('artist_id', $result->getBreak());
+        $this->assertEquals(["id" => "string", "name" => "string", "artist" => "association", "label" => "association"], $result->getProperties());
     }
 
     public function testBuildFromClassOther()
@@ -71,7 +85,6 @@ class ScanningServiceTest extends TestCase
         $this->assertArrayHasKey(0, $result);
         $this->assertInstanceOf(Source::class, $result[0]);
         $this->assertEquals(Artist::class, $result[0]->getClassName());
-        $this->assertEmpty($result[0]->getPath());
         $this->assertEmpty($result[0]->getBreak());
         $this->assertEquals(["id" => "string", "name" => "string"], $result[0]->getProperties());
     }

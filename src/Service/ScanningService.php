@@ -70,7 +70,7 @@ class ScanningService
      */
     private function buildSource (Skizzle $annotation, \ReflectionClass $reflectionClass)
     {
-        $source = new Source($reflectionClass->getName(), $annotation->path, $annotation->break);
+        $source = new Source($reflectionClass->getName(), $annotation->break);
 
         foreach ($reflectionClass->getProperties() as $reflectionProperty) {
             $annotation = $this->reader->getPropertyAnnotation($reflectionProperty, Skizzle\Field::class);

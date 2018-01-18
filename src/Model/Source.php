@@ -13,19 +13,15 @@ class Source
     /* @var string|null */
     private $break;
 
-    /* @var string|null */
-    private $path;
-
     /* @var string */
     private $className;
 
     /* @var array */
     private $properties;
 
-    function __construct ($className, $path = null, $break = null)
+    function __construct ($className, $break = null)
     {
         $this->className = $className;
-        $this->path = $path;
         $this->break = $break;
         $this->properties = [];
     }
@@ -37,15 +33,6 @@ class Source
     function getBreak ()
     {
         return $this->break;
-    }
-
-    /**
-     *
-     * @return string|null
-     */
-    function getPath ()
-    {
-        return $this->path;
     }
 
     /**
