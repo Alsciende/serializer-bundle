@@ -12,68 +12,42 @@ use Alsciende\SerializerBundle\Model\Source;
  */
 class StoringService
 {
-
     /**
      * Retrieve Blocks from a Source configuration
      *
      * @param Source $source
      * @param string $basePath
-     * @return Block[]|null
+     * @return void
      */
-    public function retrieve (Source $source, $basePath)
+    public function retrieveBlocks (Source $source, $basePath)
     {
         $parts = explode('\\', $source->getClassName());
         $path = $basePath . "/" . array_pop($parts);
 
-        if ($source->getBreak() === null) {
-            if (file_exists("$path.json") and is_file("$path.json")) {
-                $blocks = $this->scanFile("$path.json");
-            } else {
-                return null;
-            }
-        } else {
-            if (file_exists("$path") and is_dir("$path")) {
-                $blocks = $this->scanDirectory("$path");
-            } else {
-                throw new \Exception("Directory $path not found");
-            }
-        }
-
-        foreach ($blocks as $block) {
-            $block->setSource($source);
-        }
-
-        return $blocks;
+        $source->hasBreak() ? $this->scanDirectory($source, $path) : $this->scanFile($source, $path.'.json');
     }
 
     /**
-     *
-     * @param string $path
-     * @return Block[]
+     * @param Source $source
+     * @param        $path
      */
-    public function scanDirectory ($path)
+    public function scanDirectory (Source $source, $path)
     {
-        $filenames = glob("$path/*.json");
-
-        $blocks = [];
-        foreach ($filenames as $filename) {
-            $blocks = array_merge($blocks, $this->scanFile($filename));
+        if (file_exists($path) && is_dir($path)) {
+            foreach (glob("$path/*.json") as $filename) {
+                $this->scanFile($source, $filename);
+            }
         }
-
-        return $blocks;
     }
 
     /**
-     *
-     * @param string $path
-     * @return Block[]
+     * @param Source $source
+     * @param        $path
      */
-    public function scanFile ($path)
+    public function scanFile (Source $source, $path)
     {
-        $data = file_get_contents($path);
-        $block = new Block($data, $path);
-
-        return [$block];
+        if (file_exists($path) && is_file($path)) {
+            $source->addBlock(new Block(file_get_contents($path), $path));
+        }
     }
-
 }

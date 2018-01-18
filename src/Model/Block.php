@@ -11,7 +11,6 @@ namespace Alsciende\SerializerBundle\Model;
  */
 class Block
 {
-
     /**
      * @var Source
      */
@@ -34,7 +33,7 @@ class Block
 
     /**
      *
-     * @param string $data
+     * @param string      $data
      * @param string|null $path
      */
     function __construct ($data, $path = null)
@@ -97,7 +96,7 @@ class Block
     /**
      *
      * @param string $path
-     * @return self
+     * @return $this
      */
     function setPath ($path)
     {
@@ -109,7 +108,7 @@ class Block
     /**
      *
      * @param string $data
-     * @return self
+     * @return $this
      */
     function setData ($data)
     {
@@ -121,7 +120,7 @@ class Block
     /**
      *
      * @param string $name
-     * @return self
+     * @return $this
      */
     function setName ($name)
     {
@@ -129,6 +128,4 @@ class Block
 
         return $this;
     }
-
-
 }

@@ -10,29 +10,41 @@ namespace Alsciende\SerializerBundle\Model;
 class Source
 {
 
-    /* @var string|null */
+    /** @var string|null $break */
     private $break;
 
-    /* @var string */
+    /** @var string $className */
     private $className;
 
-    /* @var array */
+    /** @var array $properties */
     private $properties;
 
-    function __construct ($className, $break = null)
+    /** @var Block[] $blocks */
+    private $blocks;
+
+    public function __construct ($className, $break = null)
     {
         $this->className = $className;
         $this->break = $break;
         $this->properties = [];
+        $this->blocks = [];
     }
 
     /**
      *
      * @return string|null
      */
-    function getBreak ()
+    public function getBreak ()
     {
         return $this->break;
+    }
+
+    /**
+     * @return bool
+     */
+    public function hasBreak ()
+    {
+        return isset($this->break);
     }
 
     /**
@@ -49,7 +61,7 @@ class Source
      *
      * @return array
      */
-    function getProperties ()
+    public function getProperties ()
     {
         return $this->properties;
     }
@@ -59,13 +71,32 @@ class Source
      *
      * @param string $name
      * @param string $type
-     * @return self
+     * @return $this
      */
-    function addProperty ($name, $type)
+    public function addProperty ($name, $type)
     {
         $this->properties[$name] = $type;
 
         return $this;
     }
 
+    /**
+     * @return Block[]
+     */
+    public function getBlocks ()
+    {
+        return $this->blocks;
+    }
+
+    /**
+     * @param Block $block
+     * @return $this
+     */
+    public function addBlock (Block $block)
+    {
+        $this->blocks[] = $block;
+        $block->setSource($this);
+
+        return $this;
+    }
 }

@@ -38,7 +38,7 @@ class Fragment
     /**
      *
      * @param array $data
-     * @return self
+     * @return $this
      */
     function setData ($data)
     {
@@ -59,7 +59,7 @@ class Fragment
     /**
      *
      * @param Block $block
-     * @return self
+     * @return $this
      */
     function setBlock ($block)
     {
