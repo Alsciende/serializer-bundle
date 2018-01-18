@@ -2,6 +2,9 @@
 
 namespace Alsciende\SerializerBundle\Service;
 
+use Alsciende\SerializerBundle\Exception\BreakValueMismatchException;
+use Alsciende\SerializerBundle\Exception\FailedDecodingException;
+use Alsciende\SerializerBundle\Exception\InvalidBlockDataException;
 use Alsciende\SerializerBundle\Model\Block;
 use Alsciende\SerializerBundle\Model\Fragment;
 
@@ -13,40 +16,47 @@ use Alsciende\SerializerBundle\Model\Fragment;
 class EncodingService
 {
     /**
-     *
      * @param Block $block
      * @return Fragment[]
+     * @throws BreakValueMismatchException
+     * @throws FailedDecodingException
+     * @throws InvalidBlockDataException
      */
     public function decode (Block $block)
     {
         $list = json_decode($block->getData(), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
-            throw new \UnexpectedValueException("Block data cannot be decoded (" . json_last_error_msg() . ") " . $block->getData());
+            throw new FailedDecodingException('json', $block->getData(), json_last_error_msg());
         }
         $valid = is_array($list) && (count($list) === 0 || array_key_exists(0, $list));
         if ($valid === false) {
-            throw new \UnexpectedValueException("Block data cannot be decoded to a numeric array: " . $block->getData());
+            throw new InvalidBlockDataException($block->getData());
         }
         $fragments = [];
         foreach ($list as $data) {
-            if ($block->getSource()->getBreak()) {
-                $this->applyBreak($block, $data);
-            }
-            $fragment = new Fragment($data);
-            $fragment->setBlock($block);
-            $fragments[] = $fragment;
+            $fragments[] = new Fragment($block, $this->applyBreak($block, $data));
         }
 
         return $fragments;
     }
 
-    private function applyBreak (Block $block, &$data)
+    /**
+     * @param Block $block
+     * @param array $data
+     * @throws BreakValueMismatchException
+     * @return array
+     */
+    private function applyBreak (Block $block, $data)
     {
         $break = $block->getSource()->getBreak();
-        if (!isset($data[$break])) {
-            $data[$break] = $block->getName();
-        } elseif ($data[$break] !== $block->getName()) {
-            throw new \Exception("Discrepancy in " . $block->getPath() . ": value from '" . $break . "': " . $data[$break] . " is different from block name: " . $block->getName());
+        if (isset($break)) {
+            if (!isset($data[$break])) {
+                $data[$break] = $block->getName();
+            } elseif ($data[$break] !== $block->getName()) {
+                throw new BreakValueMismatchException($block, $data[$break]);
+            }
         }
+
+        return $data;
     }
 }

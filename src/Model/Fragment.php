@@ -20,8 +20,9 @@ class Fragment
      */
     private $block;
 
-    function __construct ($data)
+    function __construct (Block $block, $data)
     {
+        $this->block = $block;
         $this->data = $data;
     }
 
