@@ -8,27 +8,38 @@
 
 namespace Alsciende\SerializerBundle\Test\Resources\Entity;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle;
+
 /**
+ * @Skizzle(break="artist_id")
  */
 class Album
 {
     /**
      * @var string
+     *
+     * @Skizzle\Field(type="string")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @Skizzle\Field(type="string")
      */
     private $name;
 
     /**
      * @var Artist
+     *
+     * @Skizzle\Field(type="association")
      */
     private $artist;
 
     /**
      * @var Label
+     *
+     * @Skizzle\Field(type="association")
      */
     private $label;
 

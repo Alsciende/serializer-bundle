@@ -5,7 +5,7 @@ namespace Alsciende\SerializerBundle\Test\Service;
 use Alsciende\SerializerBundle\Model\Source;
 use Alsciende\SerializerBundle\Service\MetadataService;
 use Alsciende\SerializerBundle\Service\ScanningService;
-use Alsciende\SerializerBundle\Test\Resources\Entity\Alien;
+use Alsciende\SerializerBundle\Test\Resources\Entity\Other;
 use Alsciende\SerializerBundle\Test\Resources\Entity\Artist;
 use Doctrine\Common\Annotations\AnnotationReader;
 use PHPUnit\Framework\TestCase;
@@ -48,13 +48,13 @@ class ScanningServiceTest extends TestCase
         $this->assertEquals(["id" => "string", "name" => "string"], $result->getProperties());
     }
 
-    public function testBuildFromClassUnmanaged()
+    public function testBuildFromClassOther()
     {
         $annotationReader = new AnnotationReader();
         $metadataService = $this->getMetadataServiceStub();
 
         $service = new ScanningService($metadataService, $annotationReader);
-        $result = $service->buildFromClass(Alien::class);
+        $result = $service->buildFromClass(Other::class);
 
         $this->assertNull($result);
     }

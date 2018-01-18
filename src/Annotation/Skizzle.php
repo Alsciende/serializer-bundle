@@ -14,12 +14,13 @@ use Doctrine\Common\Annotations\Annotation;
  */
 class Skizzle extends Annotation
 {
-    /* @var string */
+    /**
+     * @var string
+     */
     public $break;
 
-    /* @var string */
+    /**
+     * @var string
+     */
     public $path;
-
-    /* @var string */
-    public $type;
 }

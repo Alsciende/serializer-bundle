@@ -18,14 +18,14 @@ class Artist
     /**
      * @var string
      *
-     * @Skizzle(type="string")
+     * @Skizzle\Field(type="string")
      */
     private $id;
 
     /**
      * @var string
      *
-     * @Skizzle(type="string")
+     * @Skizzle\Field(type="string")
      */
     private $name;
 

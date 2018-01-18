@@ -73,7 +73,7 @@ class ScanningService
         $source = new Source($reflectionClass->getName(), $annotation->path, $annotation->break);
 
         foreach ($reflectionClass->getProperties() as $reflectionProperty) {
-            $annotation = $this->reader->getPropertyAnnotation($reflectionProperty, Skizzle::class);
+            $annotation = $this->reader->getPropertyAnnotation($reflectionProperty, Skizzle\Field::class);
             if ($annotation && isset($annotation->type)) {
                 $source->addProperty($reflectionProperty->name, $annotation->type);
             }

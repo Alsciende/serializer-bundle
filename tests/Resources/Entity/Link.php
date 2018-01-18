@@ -1,26 +1,35 @@
 <?php
 
 namespace Alsciende\SerializerBundle\Test\Resources\Entity;
+use Alsciende\SerializerBundle\Annotation\Skizzle;
 
 /**
  * Description of Link
  *
  * @author Alsciende <alsciende@icloud.com>
+ *
+ * @Skizzle(break="artist_id")
  */
 class Link
 {
     /**
      * @var Artist
+     *
+     * @Skizzle\Field(type="association")
      */
     private $artist;
 
     /**
      * @var Website
+     *
+     * @Skizzle\Field(type="association")
      */
     private $website;
 
     /**
      * @var string
+     *
+     * @Skizzle\Field(type="string")
      */
     private $url;
 

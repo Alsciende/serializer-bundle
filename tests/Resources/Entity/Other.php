@@ -7,7 +7,7 @@ namespace Alsciende\SerializerBundle\Test\Resources\Entity;
  *
  * @author Alsciende <alsciende@icloud.com>
  */
-class Alien
+class Other
 {
 
 }

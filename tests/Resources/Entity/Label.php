@@ -7,18 +7,24 @@
  */
 
 namespace Alsciende\SerializerBundle\Test\Resources\Entity;
+use Alsciende\SerializerBundle\Annotation\Skizzle;
 
 /**
+ * @Skizzle()
  */
 class Label
 {
     /**
      * @var string
+     *
+     * @Skizzle\Field(type="string")
      */
     private $id;
 
     /**
      * @var string
+     *
+     * @Skizzle\Field(type="string")
      */
     private $name;
 
