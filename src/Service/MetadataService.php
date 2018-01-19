@@ -22,7 +22,7 @@ class MetadataService extends AbstractAdapter
      *
      * @return string[]
      */
-    function getAllManagedClassNames ()
+    public function getAllManagedClassNames ()
     {
         $result = [];
         $allMetadata = $this->getAllMetadata();
@@ -40,7 +40,7 @@ class MetadataService extends AbstractAdapter
      * @param string $className
      * @return string[]
      */
-    function getAllTargetClasses ($className)
+    public function getAllTargetClasses ($className)
     {
         $result = [];
 
@@ -54,7 +54,9 @@ class MetadataService extends AbstractAdapter
         return $result;
     }
 
-
-
-
+    public function getColumnName ($className, $fieldName)
+    {
+        $classMetadata = $this->getMetadataFor($className);
+        return $classMetadata->getColumnName($fieldName);
+    }
 }
