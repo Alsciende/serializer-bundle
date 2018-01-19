@@ -33,7 +33,7 @@ class StoringServiceTest extends TestCase
         $this->assertEquals(1, count($result));
         $this->assertArrayHasKey(0, $result);
         $this->assertInstanceOf(Block::class, $result[0]);
-        $this->assertEmpty($result[0]->getSource());
+        $this->assertEquals($source, $result[0]->getSource());
         $this->assertEquals('Artist', $result[0]->getName());
         $this->assertNotEmpty($result[0]->getData());
     }
@@ -43,8 +43,10 @@ class StoringServiceTest extends TestCase
      */
     public function testScanDirectory()
     {
+        $source = new Source(Album::class);
         $service = new StoringService();
-        $result = $service->scanDirectory(__DIR__ . '/../Resources/data/Album');
+        $service->scanDirectory($source,__DIR__ . '/../Resources/data/Album');
+        $result = $source->getBlocks();
 
         $this->assertInternalType('array', $result);
         $this->assertNotEmpty($result);
@@ -58,15 +60,15 @@ class StoringServiceTest extends TestCase
     {
         $service = new StoringService();
         $source = new Source(Artist::class);
-        $service->retrieveBlocks($source, __DIR__ . '/../Resources/data');
+        $result = $service->retrieveBlocks($source, __DIR__ . '/../Resources/data');
 
-        $this->assertNotEmpty($source->getBlocks());
-        $this->assertEquals(1, count($source->getBlocks()));
-        $this->assertArrayHasKey(0, $source->getBlocks());
-        $this->assertInstanceOf(Block::class, $source->getBlocks()[0]);
-        $this->assertEquals($source, $source->getBlocks()[0]->getSource());
-        $this->assertEquals('Artist', $source->getBlocks()[0]->getName());
-        $this->assertNotEmpty($source->getBlocks()[0]->getData());
+        $this->assertNotEmpty($result);
+        $this->assertEquals(1, count($result));
+        $this->assertArrayHasKey(0, $result);
+        $this->assertInstanceOf(Block::class, $result[0]);
+        $this->assertEquals($source, $result[0]->getSource());
+        $this->assertEquals('Artist', $result[0]->getName());
+        $this->assertNotEmpty($result[0]->getData());
     }
 
     /**
@@ -76,14 +78,14 @@ class StoringServiceTest extends TestCase
     {
         $service = new StoringService();
         $source = new Source(Album::class, 'Album');
-        $service->retrieveBlocks($source, __DIR__ . '/../Resources/data');
+        $result = $service->retrieveBlocks($source, __DIR__ . '/../Resources/data');
 
-        $this->assertNotEmpty($source->getBlocks());
-        $this->assertEquals(1, count($source->getBlocks()));
-        $this->assertArrayHasKey(0, $source->getBlocks());
-        $this->assertInstanceOf(Block::class, $source->getBlocks()[0]);
-        $this->assertEquals($source, $source->getBlocks()[0]->getSource());
-        $this->assertEquals('pink-floyd', $source->getBlocks()[0]->getName());
-        $this->assertNotEmpty($source->getBlocks()[0]->getData());
+        $this->assertNotEmpty($result);
+        $this->assertEquals(1, count($result));
+        $this->assertArrayHasKey(0, $result);
+        $this->assertInstanceOf(Block::class, $result[0]);
+        $this->assertEquals($source, $result[0]->getSource());
+        $this->assertEquals('pink-floyd', $result[0]->getName());
+        $this->assertNotEmpty($result[0]->getData());
     }
 }

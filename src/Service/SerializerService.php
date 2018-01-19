@@ -47,8 +47,7 @@ class SerializerService
     {
         $result = [];
 
-        $this->storingService->retrieveBlocks($source, $defaultPath);
-        foreach ($source->getBlocks() as $block) {
+        foreach ($this->storingService->retrieveBlocks($source, $defaultPath) as $block) {
             $result = array_merge($result, $this->importBlock($block));
         }
 

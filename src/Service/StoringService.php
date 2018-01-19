@@ -17,19 +17,21 @@ class StoringService
      *
      * @param Source $source
      * @param string $basePath
-     * @return void
+     * @return Block[]
      */
     public function retrieveBlocks (Source $source, $basePath)
     {
         $parts = explode('\\', $source->getClassName());
         $path = $basePath . "/" . array_pop($parts);
 
-        $source->hasBreak() ? $this->scanDirectory($source, $path) : $this->scanFile($source, $path.'.json');
+        $source->hasBreak() ? $this->scanDirectory($source, $path) : $this->scanFile($source, $path . '.json');
+
+        return $source->getBlocks();
     }
 
     /**
      * @param Source $source
-     * @param        $path
+     * @param string $path
      */
     public function scanDirectory (Source $source, $path)
     {
@@ -42,7 +44,7 @@ class StoringService
 
     /**
      * @param Source $source
-     * @param        $path
+     * @param string $path
      */
     public function scanFile (Source $source, $path)
     {
