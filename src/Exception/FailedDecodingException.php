@@ -19,9 +19,10 @@ class FailedDecodingException extends \Exception
     private $data;
 
     /**
-     * DecodingException constructor.
+     * FailedDecodingException constructor.
      * @param string $format
      * @param string $data
+     * @param string $message
      */
     public function __construct ($format, $data, $message)
     {

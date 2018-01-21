@@ -1,34 +1,29 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: cedric
- * Date: 19/01/18
- * Time: 16:13
- */
 
 namespace Alsciende\SerializerBundle\Service\Normalizer;
 
 /**
+ * Description of IntegerNormalizer
+ *
+ * @author Alsciende <alsciende@icloud.com>
  */
-class StringNormalizer extends AbstractNormalizer implements NormalizerInterface
+class IntegerNormalizer extends AbstractNormalizer implements NormalizerInterface
 {
-    /**
-     * @inheritdoc
-     */
     public function supports ()
     {
-        return 'string';
+        return 'integer';
     }
 
     /**
      * @param string $className
      * @param string $fieldName
      * @param array $data
-     * @return string
+     * @return integer
      */
     public function normalize ($className, $fieldName, $data)
     {
         $rawValue = $this->getRawValue($className, $fieldName, $data);
-        return isset($rawValue) ? strval($rawValue) : null;
+
+        return isset($rawValue) ? intval($rawValue) : null;
     }
 }

@@ -54,9 +54,26 @@ class MetadataService extends AbstractAdapter
         return $result;
     }
 
+    /**
+     * @param string $className
+     * @param string $fieldName
+     * @return string
+     */
     public function getColumnName ($className, $fieldName)
     {
         $classMetadata = $this->getMetadataFor($className);
         return $classMetadata->getColumnName($fieldName);
+    }
+
+    /**
+     * @param string $className
+     * @param string $fieldName
+     * @return array
+     * @throws \Doctrine\ORM\Mapping\MappingException
+     */
+    public function getAssociationMapping ($className, $fieldName)
+    {
+        $classMetadata = $this->getMetadataFor($className);
+        return $classMetadata->getAssociationMapping($fieldName);
     }
 }

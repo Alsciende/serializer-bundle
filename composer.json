@@ -21,7 +21,11 @@
     "psr-4": { "Alsciende\\SerializerBundle\\Test\\": "tests/" }
   },
   "require-dev": {
+    "phpstan/phpstan": "^0.9.1",
     "phpunit/phpunit": "^6.5",
-    "phpstan/phpstan": "^0.9.1"
+    "symfony/var-dumper": "^4.0"
+  },
+  "config": {
+    "sort-packages": true
   }
 }

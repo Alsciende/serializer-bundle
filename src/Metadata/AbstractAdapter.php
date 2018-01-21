@@ -35,4 +35,15 @@ abstract class AbstractAdapter
     {
         return $this->entityManager->getClassMetadata($className);
     }
+
+    /**
+     * @param string $className
+     * @param mixed $id
+     * @return object|null
+     * @throws \Doctrine\ORM\ORMException
+     */
+    public function getReference ($className, $id)
+    {
+        return $this->entityManager->getReference($className, $id);
+    }
 }

@@ -29,6 +29,13 @@ class Label
     private $name;
 
     /**
+     * @var bool
+     *
+     * @Skizzle\Field(type="boolean")
+     */
+    private $active;
+
+    /**
      * @return string
      */
     public function getId ()
@@ -62,6 +69,25 @@ class Label
     public function setName ($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isActive ()
+    {
+        return $this->active;
+    }
+
+    /**
+     * @param bool $active
+     * @return $this
+     */
+    public function setActive ($active)
+    {
+        $this->active = $active;
 
         return $this;
     }

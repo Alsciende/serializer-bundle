@@ -45,7 +45,7 @@ class ScanningServiceTest extends TestCase
         $this->assertInstanceOf(Source::class, $result);
         $this->assertEquals(Artist::class, $result->getClassName());
         $this->assertEmpty($result->getBreak());
-        $this->assertEquals(["id" => "string", "name" => "string"], $result->getProperties());
+        $this->assertEquals(["id" => "string", "name" => "string", "styles" => "array", "foundedIn" => "string"], $result->getProperties());
     }
 
     public function testBuildFromClassAlbum()
@@ -59,7 +59,7 @@ class ScanningServiceTest extends TestCase
         $this->assertInstanceOf(Source::class, $result);
         $this->assertEquals(Album::class, $result->getClassName());
         $this->assertEquals('artist_id', $result->getBreak());
-        $this->assertEquals(["id" => "string", "name" => "string", "artist" => "association", "label" => "association"], $result->getProperties());
+        $this->assertEquals(["id" => "string", "name" => "string", "artist" => "association", "label" => "association", "nbTracks" => "integer", "dateRelease" => "date"], $result->getProperties());
     }
 
     public function testBuildFromClassOther()
@@ -86,6 +86,6 @@ class ScanningServiceTest extends TestCase
         $this->assertInstanceOf(Source::class, $result[0]);
         $this->assertEquals(Artist::class, $result[0]->getClassName());
         $this->assertEmpty($result[0]->getBreak());
-        $this->assertEquals(["id" => "string", "name" => "string"], $result[0]->getProperties());
+        $this->assertEquals(["id" => "string", "name" => "string", "styles" => "array", "foundedIn" => "string"], $result[0]->getProperties());
     }
 }

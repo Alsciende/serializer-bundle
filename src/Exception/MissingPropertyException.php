@@ -20,13 +20,13 @@ class MissingPropertyException extends \Exception
 
     /**
      * MissingPropertyException constructor.
-     * @param $data
-     * @param $columnName
+     * @param array $data
+     * @param string $columnName
      */
     public function __construct ($data, $columnName)
     {
         $this->data = $data;
         $this->columnName = $columnName;
-        parent::__construct('Missing property in data.');
+        parent::__construct(sprintf('Missing property [%s] in data.', $columnName));
     }
 }

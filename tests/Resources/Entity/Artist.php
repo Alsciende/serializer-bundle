@@ -30,6 +30,20 @@ class Artist
     private $name;
 
     /**
+     * @var array
+     *
+     * @Skizzle\Field(type="array")
+     */
+    private $styles;
+
+    /**
+     * @var string
+     *
+     * @Skizzle\Field(type="string")
+     */
+    private $foundedIn;
+
+    /**
      * @return string
      */
     public function getId ()
@@ -63,6 +77,44 @@ class Artist
     public function setName ($name)
     {
         $this->name = $name;
+
+        return $this;
+    }
+
+    /**
+     * @return array
+     */
+    public function getStyles ()
+    {
+        return $this->styles;
+    }
+
+    /**
+     * @param array $styles
+     * @return $this
+     */
+    public function setStyles ($styles)
+    {
+        $this->styles = $styles;
+
+        return $this;
+    }
+
+    /**
+     * @return string
+     */
+    public function getFoundedIn ()
+    {
+        return $this->foundedIn;
+    }
+
+    /**
+     * @param string $foundedIn
+     * @return $this
+     */
+    public function setFoundedIn ($foundedIn)
+    {
+        $this->foundedIn = $foundedIn;
 
         return $this;
     }

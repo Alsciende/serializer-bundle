@@ -3,6 +3,7 @@
         "id": "the-dark-side-of-the-moon",
         "name": "The Dark Side of the Moon",
         "release_date": "1973-03-01",
-        "label_id": "harvest"
+        "label_id": "harvest",
+        "nb_tracks": 10
     }
 ]

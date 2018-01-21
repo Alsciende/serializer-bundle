@@ -2,6 +2,7 @@
     {
         "id": "harvest-records",
         "name": "Harvest",
-        "country_id": "GB"
+        "country_id": "GB",
+        "is_active": true
     }
 ]

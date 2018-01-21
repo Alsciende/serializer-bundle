@@ -1,6 +1,12 @@
 [
     {
         "id": "pink-floyd",
-        "name": "Pink Floyd"
+        "name": "Pink Floyd",
+        "styles": [
+            "Progressive Rock",
+            "Psychedelic Rock",
+            "Rock"
+        ],
+        "founded_in": "1965"
     }
 ]

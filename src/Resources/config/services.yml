@@ -1,6 +1,14 @@
 services:
+    _defaults:
+        bind:
+            Alsciende\SerializerBundle\Service\Normalizer\NormalizerInterface:
+                tags: ['skizzle.normalizer']
+
     Alsciende\SerializerBundle\Service\:
         resource: '../../../src/Service/*'
         autowire: true
         autoconfigure: true
         public: false
+
+    Alsciende\SerializerBundle\Service\NormalizerManager:
+        arguments: [!tagged skizzle.normalizer]

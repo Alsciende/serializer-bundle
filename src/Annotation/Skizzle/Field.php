@@ -21,7 +21,7 @@ class Field extends Annotation
     /**
      * @var string
      * @Required()
-     * @Enum({"string","integer","boolean","date","array","annotation"})
+     * @Enum({"string","integer","boolean","date","array","association"})
      */
     public $type;
 }

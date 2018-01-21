@@ -43,7 +43,7 @@ class ObjectManager
     }
 
     /**
-     * Return the reference corresponding to the assocation in the entity
+     * Return the reference corresponding to the association in the entity
      *
      * @param string $targetClass
      * @param string $associationKey
@@ -231,6 +231,7 @@ class ObjectManager
      * array([ "associationKey" => "article", "associationValue" => (object Article), "referenceKeys" => [ "article_id"] ])
      *
      * @param array $data
+     * @param string $className
      * @return array
      */
     function findAssociations ($data, $className)

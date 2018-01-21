@@ -44,6 +44,20 @@ class Album
     private $label;
 
     /**
+     * @var integer
+     *
+     * @Skizzle\Field(type="integer")
+     */
+    private $nbTracks;
+
+    /**
+     * @var \DateTime
+     *
+     * @Skizzle\Field(type="date")
+     */
+    private $dateRelease;
+
+    /**
      * @return string
      */
     public function getId ()
@@ -115,6 +129,44 @@ class Album
     public function setLabel ($label)
     {
         $this->label = $label;
+
+        return $this;
+    }
+
+    /**
+     * @return int
+     */
+    public function getNbTracks ()
+    {
+        return $this->nbTracks;
+    }
+
+    /**
+     * @param integer $nbTracks
+     * @return $this
+     */
+    public function setNbTracks ($nbTracks)
+    {
+        $this->nbTracks = $nbTracks;
+
+        return $this;
+    }
+
+    /**
+     * @return \DateTime
+     */
+    public function getDateRelease ()
+    {
+        return $this->dateRelease;
+    }
+
+    /**
+     * @param \DateTime $dateRelease
+     * @return $this
+     */
+    public function setDateRelease ($dateRelease)
+    {
+        $this->dateRelease = $dateRelease;
 
         return $this;
     }
