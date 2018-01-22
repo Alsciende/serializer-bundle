@@ -19,22 +19,22 @@ class SerializerService
     /** @var EncodingService $encodingService */
     private $encodingService;
 
-    /** @var NormalizingService $normalizingService */
-    private $normalizingService;
+    /** @var NormalizerManager $normalizerManager */
+    private $normalizerManager;
 
-    /** @var ObjectManager $objectManager */
-    private $objectManager;
+    /** @var MetadataService $metadataService */
+    private $metadataService;
 
     public function __construct (
         StoringService $storingService,
         EncodingService $encodingService,
-        NormalizingService $normalizingService,
-        ObjectManager $objectManager
+        NormalizerManager $normalizerManager,
+        MetadataService $metadataService
     ) {
         $this->storingService = $storingService;
         $this->encodingService = $encodingService;
-        $this->normalizingService = $normalizingService;
-        $this->objectManager = $objectManager;
+        $this->normalizerManager = $normalizerManager;
+        $this->metadataService = $metadataService;
     }
 
     /**
@@ -46,7 +46,6 @@ class SerializerService
     public function importSource (Source $source, $defaultPath)
     {
         $result = [];
-
         foreach ($this->storingService->retrieveBlocks($source, $defaultPath) as $block) {
             $result = array_merge($result, $this->importBlock($block));
         }
@@ -72,41 +71,17 @@ class SerializerService
     /**
      *
      * @param Fragment $fragment
-     * @return array
+     * @return object
      */
     public function importFragment (Fragment $fragment)
     {
-        $data = $fragment->getData();
         $className = $fragment->getBlock()->getSource()->getClassName();
-        $properties = $fragment->getBlock()->getSource()->getProperties();
+        $array = $this->normalizerManager->denormalize(
+            $className,
+            $fragment->getBlock()->getSource()->getProperties(),
+            $fragment->getData()
+        );
 
-        $result = ['data' => $data];
-
-        // find the entity based on the incoming identifier
-        $entity = $this->objectManager->findOrCreateObject($data, $className);
-
-        // denormalize the designated properties of the data into an array
-        $array = $this->normalizingService->denormalize($data, $className, $properties);
-        $result['array'] = $array;
-        $result['original'] = $this->getOriginal($entity, $array);
-
-        // update the entity with the values of the denormalized array
-        $this->objectManager->updateObject($entity, $array);
-        $this->objectManager->mergeObject($entity);
-        $result['entity'] = $entity;
-
-        return $result;
+        return $this->metadataService->hydrate($className, $array);
     }
-
-    public function getOriginal ($entity, $array)
-    {
-        $result = [];
-
-        foreach (array_keys($array) as $property) {
-            $result[$property] = $this->objectManager->readObject($entity, $property);
-        }
-
-        return $result;
-    }
-
 }

@@ -76,4 +76,20 @@ class MetadataService extends AbstractAdapter
         $classMetadata = $this->getMetadataFor($className);
         return $classMetadata->getAssociationMapping($fieldName);
     }
+
+    /**
+     * @param string $className
+     * @param array $data
+     * @return object
+     */
+    public function hydrate ($className, $data)
+    {
+        $entity = new $className;
+        $classMetadata = $this->getMetadataFor($className);
+        foreach ($data as $field => $value) {
+            $classMetadata->setFieldValue($entity, $field, $value);
+        }
+
+        return $entity;
+    }
 }

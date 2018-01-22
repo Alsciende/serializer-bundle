@@ -43,5 +43,7 @@ class NormalizerManager
 
             $result[$property] = $normalizer->normalize($className, $property, $data);
         }
+
+        return $result;
     }
 }

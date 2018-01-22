@@ -39,6 +39,6 @@ class AssociationNormalizer extends AbstractNormalizer implements NormalizerInte
             $referenceValues[$targetIdentifier] = $data[$referenceKey];
         }
 
-        return $this->metadata->getReference($className, $referenceValues);
+        return $this->metadata->getReference($associationMapping['targetEntity'], $referenceValues);
     }
 }
