@@ -31,12 +31,18 @@ class PersistenceManager
      */
     public function findManaged ($className, $entity)
     {
-        $obj = $this->entityManager->find(
-            $className,
-            $this->entityManager->getClassMetadata($className)->getIdentifierValues($entity)
-        );
+        $classMetadata = $this->entityManager->getClassMetadata($className);
+        $id = $classMetadata->getIdentifierValues($entity);
 
-        $this->entityManager->initializeObject($obj);
+        $obj = $this->entityManager->find($className, $id);
+
+        if($obj === null) {
+            $obj = new $className;
+            $classMetadata->setIdentifierValues($obj, $id);
+            $this->entityManager->persist($obj);
+        } else {
+            $this->entityManager->initializeObject($obj);
+        }
 
         return $obj;
     }
