@@ -41,4 +41,9 @@ class AssociationNormalizer extends AbstractNormalizer implements NormalizerInte
 
         return $this->metadata->getReference($associationMapping['targetEntity'], $referenceValues);
     }
+
+    public function isEqual ($a, $b)
+    {
+        return $a === $b;
+    }
 }

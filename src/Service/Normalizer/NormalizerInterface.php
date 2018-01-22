@@ -25,4 +25,11 @@ interface NormalizerInterface
      * @throws MissingPropertyException
      */
     public function normalize($className, $fieldName, $data);
+
+    /**
+     * @param mixed $a
+     * @param mixed $b
+     * @return bool
+     */
+    public function isEqual($a, $b);
 }

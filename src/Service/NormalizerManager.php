@@ -12,7 +12,7 @@ use Alsciende\SerializerBundle\Service\Normalizer\NormalizerInterface;
  */
 class NormalizerManager
 {
-    /** @var NormalizerInterface $normalizers */
+    /** @var NormalizerInterface[] $normalizers */
     private $normalizers;
 
     /**
@@ -31,19 +31,29 @@ class NormalizerManager
      * @param array $propertyMap
      * @param array $data
      */
-    public function denormalize($className, $propertyMap, $data)
+    public function normalize($className, $propertyMap, $data)
     {
         $result = [];
 
         foreach ($propertyMap as $property => $type) {
-            $normalizer = $this->normalizers[$type];
-            if(!$normalizer instanceof NormalizerInterface) {
-                throw new UnknownTypeException($type);
-            }
-
-            $result[$property] = $normalizer->normalize($className, $property, $data);
+            $result[$property] = $this->getNormalizer($type)->normalize($className, $property, $data);
         }
 
         return $result;
+    }
+
+    /**
+     * @param string $type
+     * @return NormalizerInterface
+     * @throws UnknownTypeException
+     */
+    public function getNormalizer ($type)
+    {
+        $normalizer = $this->normalizers[$type];
+        if(!$normalizer instanceof NormalizerInterface) {
+            throw new UnknownTypeException($type);
+        }
+
+        return $normalizer;
     }
 }

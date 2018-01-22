@@ -26,4 +26,9 @@ class ArrayNormalizer extends AbstractNormalizer implements NormalizerInterface
 
         return isset($rawValue) ? $rawValue : [];
     }
+
+    public function isEqual ($a, $b)
+    {
+        return $a === $b;
+    }
 }

@@ -9,6 +9,8 @@ namespace Alsciende\SerializerBundle\Service\Normalizer;
  */
 class DateNormalizer extends AbstractNormalizer implements NormalizerInterface
 {
+    const FORMAT = '!Y-m-d';
+
     public function supports ()
     {
         return 'date';
@@ -24,6 +26,11 @@ class DateNormalizer extends AbstractNormalizer implements NormalizerInterface
     {
         $rawValue = $this->getRawValue($className, $fieldName, $data);
 
-        return isset($rawValue) ? \DateTime::createFromFormat('Y-m-d', $rawValue) : null;
+        return isset($rawValue) ? \DateTime::createFromFormat(self::FORMAT, $rawValue) : null;
+    }
+
+    public function isEqual ($a, $b)
+    {
+        return $a == $b;
     }
 }

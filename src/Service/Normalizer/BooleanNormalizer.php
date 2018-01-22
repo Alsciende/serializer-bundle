@@ -26,4 +26,9 @@ class BooleanNormalizer extends AbstractNormalizer implements NormalizerInterfac
 
         return isset($rawValue) ? boolval($rawValue) : null;
     }
+
+    public function isEqual ($a, $b)
+    {
+        return $a === $b;
+    }
 }

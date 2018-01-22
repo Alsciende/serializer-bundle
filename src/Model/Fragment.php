@@ -20,7 +20,17 @@ class Fragment
      */
     private $block;
 
-    function __construct (Block $block, $data)
+    /**
+     * @var array
+     */
+    private $normalizedData;
+
+    /**
+     * @var object
+     */
+    private $entity;
+
+    public function __construct (Block $block, $data)
     {
         $this->block = $block;
         $this->data = $data;
@@ -30,42 +40,57 @@ class Fragment
      *
      * @return array
      */
-    function getData ()
+    public function getData ()
     {
         return $this->data;
     }
 
     /**
      *
-     * @param array $data
-     * @return $this
-     */
-    function setData ($data)
-    {
-        $this->data = $data;
-
-        return $this;
-    }
-
-    /**
-     *
      * @return Block
      */
-    function getBlock ()
+    public function getBlock ()
     {
         return $this->block;
     }
 
     /**
+     * @return object
+     */
+    public function getEntity ()
+    {
+        return $this->entity;
+    }
+
+    /**
+     * @param object $entity
      *
-     * @param Block $block
      * @return $this
      */
-    function setBlock ($block)
+    public function setEntity ($entity)
     {
-        $this->block = $block;
+        $this->entity = $entity;
 
         return $this;
     }
 
+    /**
+     * @return array
+     */
+    public function getNormalizedData ()
+    {
+        return $this->normalizedData;
+    }
+
+    /**
+     * @param array $normalizedData
+     *
+     * @return $this
+     */
+    public function setNormalizedData ($normalizedData)
+    {
+        $this->normalizedData = $normalizedData;
+
+        return $this;
+    }
 }

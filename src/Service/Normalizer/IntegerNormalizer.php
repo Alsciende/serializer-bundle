@@ -26,4 +26,9 @@ class IntegerNormalizer extends AbstractNormalizer implements NormalizerInterfac
 
         return isset($rawValue) ? intval($rawValue) : null;
     }
+
+    public function isEqual ($a, $b)
+    {
+        return $a === $b;
+    }
 }

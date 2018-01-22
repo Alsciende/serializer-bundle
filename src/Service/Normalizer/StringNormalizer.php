@@ -31,4 +31,9 @@ class StringNormalizer extends AbstractNormalizer implements NormalizerInterface
         $rawValue = $this->getRawValue($className, $fieldName, $data);
         return isset($rawValue) ? strval($rawValue) : null;
     }
+
+    public function isEqual ($a, $b)
+    {
+        return $a === $b;
+    }
 }

@@ -46,4 +46,17 @@ abstract class AbstractAdapter
     {
         return $this->entityManager->getReference($className, $id);
     }
+
+    /**
+     * @param string $className
+     * @param mixed $id
+     * @return object|null
+     */
+    public function find ($className, $id)
+    {
+        $obj = $this->entityManager->find($className, $id);
+        $this->entityManager->initializeObject($obj);
+
+        return $obj;
+    }
 }

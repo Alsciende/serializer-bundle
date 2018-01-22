@@ -11,6 +11,7 @@ namespace Alsciende\SerializerBundle\Test\Service\Normalizer;
 use Alsciende\SerializerBundle\Service\MetadataService;
 use Alsciende\SerializerBundle\Service\Normalizer\AssociationNormalizer;
 use Alsciende\SerializerBundle\Test\Resources\Entity\Album;
+use Alsciende\SerializerBundle\Test\Resources\Entity\Artist;
 use PHPUnit\Framework\TestCase;
 
 class AssociationNormalizerTest extends TestCase
@@ -28,6 +29,7 @@ class AssociationNormalizerTest extends TestCase
                 'sourceToTargetKeyColumns' => [
                     'artist_id' => 'id'
                 ],
+                'targetEntity' => Artist::class,
             ]);
         $stub
             ->method('getReference')

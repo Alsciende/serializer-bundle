@@ -36,10 +36,10 @@ class Block
      * @param string      $data
      * @param string|null $path
      */
-    function __construct ($data, $path = null)
+    public function __construct ($data, $path = null)
     {
         $this->data = $data;
-        $this->path = $path;
+        $this->path = realpath($path);
         if (isset($path)) {
             $this->name = pathinfo($path, PATHINFO_FILENAME);
         }
@@ -49,7 +49,7 @@ class Block
      *
      * @return Source
      */
-    function getSource ()
+    public function getSource ()
     {
         return $this->source;
     }
@@ -58,7 +58,7 @@ class Block
      *
      * @return string|null
      */
-    function getPath ()
+    public function getPath ()
     {
         return $this->path;
     }
@@ -67,7 +67,7 @@ class Block
      *
      * @return string
      */
-    function getData ()
+    public function getData ()
     {
         return $this->data;
     }
@@ -76,43 +76,19 @@ class Block
      *
      * @return string
      */
-    function getName ()
+    public function getName ()
     {
         return $this->name;
     }
 
     /**
      *
-     * @param \Alsciende\SerializerBundle\Model\Source $source
-     * @return Block
+     * @param Source $source
+     * @return $this
      */
-    function setSource (Source $source)
+    public function setSource (Source $source)
     {
         $this->source = $source;
-
-        return $this;
-    }
-
-    /**
-     *
-     * @param string $path
-     * @return $this
-     */
-    function setPath ($path)
-    {
-        $this->path = $path;
-
-        return $this;
-    }
-
-    /**
-     *
-     * @param string $data
-     * @return $this
-     */
-    function setData ($data)
-    {
-        $this->data = $data;
 
         return $this;
     }
@@ -122,7 +98,7 @@ class Block
      * @param string $name
      * @return $this
      */
-    function setName ($name)
+    public function setName ($name)
     {
         $this->name = $name;
 

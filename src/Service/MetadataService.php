@@ -62,6 +62,7 @@ class MetadataService extends AbstractAdapter
     public function getColumnName ($className, $fieldName)
     {
         $classMetadata = $this->getMetadataFor($className);
+
         return $classMetadata->getColumnName($fieldName);
     }
 
@@ -74,12 +75,13 @@ class MetadataService extends AbstractAdapter
     public function getAssociationMapping ($className, $fieldName)
     {
         $classMetadata = $this->getMetadataFor($className);
+
         return $classMetadata->getAssociationMapping($fieldName);
     }
 
     /**
      * @param string $className
-     * @param array $data
+     * @param array  $data
      * @return object
      */
     public function hydrate ($className, $data)
@@ -91,5 +93,40 @@ class MetadataService extends AbstractAdapter
         }
 
         return $entity;
+    }
+
+    /**
+     * Find the managed version of an entity
+     *
+     * @param string $className
+     * @param object $entity
+     */
+    public function findManaged ($className, $entity)
+    {
+        return $this->find($className, $this->getMetadataFor($className)->getIdentifierValues($entity));
+    }
+
+    /**
+     * @param string $className
+     * @param object $entity
+     * @param string $fieldName
+     * @return mixed
+     */
+    public function getFieldValue ($className, $entity, $fieldName)
+    {
+        return $this->getMetadataFor($className)->getFieldValue($entity, $fieldName);
+    }
+
+
+    /**
+     * @param string $className
+     * @param object $entity
+     * @param string $fieldName
+     * @param mixed $value
+     * @return void
+     */
+    public function setFieldValue ($className, $entity, $fieldName, $value)
+    {
+        $this->getMetadataFor($className)->setFieldValue($entity, $fieldName, $value);
     }
 }

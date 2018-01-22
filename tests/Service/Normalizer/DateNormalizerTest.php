@@ -38,9 +38,10 @@ class DateNormalizerTest extends TestCase
 
     public function testNormalize ()
     {
+        $result = $this->service->normalize(Album::class, 'dateRelease', ['release_date' => '1973-03-01']);
         $this->assertEquals(
-            \DateTime::createFromFormat('Y-m-d', '1973-03-01'),
-            $this->service->normalize(Album::class, 'dateRelease', ['release_date' => '1973-03-01'])
+            '1973-03-01 00:00:00',
+            $result->format('Y-m-d H:i:s')
         );
     }
 
