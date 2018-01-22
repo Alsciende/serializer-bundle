@@ -2,19 +2,21 @@
 
 namespace Alsciende\SerializerBundle\Service;
 
-use Alsciende\SerializerBundle\Metadata\AbstractAdapter;
-use Doctrine\ORM\EntityManagerInterface;
+use Doctrine\ORM\Mapping\ClassMetadata;
+use Doctrine\ORM\Mapping\ClassMetadataFactory;
 
 /**
  * Description of Adapter
  *
  * @author Alsciende <alsciende@icloud.com>
  */
-class MetadataService extends AbstractAdapter
+class MetadataService
 {
-    public function __construct (EntityManagerInterface $entityManager)
+    private $metadataFactory;
+
+    public function __construct (ClassMetadataFactory $metadataFactory)
     {
-        parent::__construct($entityManager);
+        $this->metadataFactory = $metadataFactory;
     }
 
     /**
@@ -96,17 +98,6 @@ class MetadataService extends AbstractAdapter
     }
 
     /**
-     * Find the managed version of an entity
-     *
-     * @param string $className
-     * @param object $entity
-     */
-    public function findManaged ($className, $entity)
-    {
-        return $this->find($className, $this->getMetadataFor($className)->getIdentifierValues($entity));
-    }
-
-    /**
      * @param string $className
      * @param object $entity
      * @param string $fieldName
@@ -117,16 +108,37 @@ class MetadataService extends AbstractAdapter
         return $this->getMetadataFor($className)->getFieldValue($entity, $fieldName);
     }
 
-
     /**
      * @param string $className
      * @param object $entity
      * @param string $fieldName
-     * @param mixed $value
+     * @param mixed  $value
      * @return void
      */
     public function setFieldValue ($className, $entity, $fieldName, $value)
     {
         $this->getMetadataFor($className)->setFieldValue($entity, $fieldName, $value);
+    }
+
+    /**
+     * @return \Doctrine\Common\Persistence\Mapping\ClassMetadata[]
+     */
+    private function getAllMetadata ()
+    {
+        return $this->metadataFactory->getAllMetadata();
+    }
+
+    /**
+     * @param string $className
+     * @return ClassMetadata
+     */
+    private function getMetadataFor ($className)
+    {
+        $metadata = $this->metadataFactory->getMetadataFor($className);
+        if ($metadata instanceof ClassMetadata) {
+            return $metadata;
+        }
+
+        throw new \LogicException('Doctrine MetadataFactory->getMetadataFor should return \Doctrine\ORM\Mapping\ClassMetadata objects.');
     }
 }

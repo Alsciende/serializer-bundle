@@ -17,7 +17,7 @@ class ArrayNormalizer extends AbstractNormalizer implements NormalizerInterface
     /**
      * @param string $className
      * @param string $fieldName
-     * @param array $data
+     * @param array  $data
      * @return array
      */
     public function normalize ($className, $fieldName, $data)

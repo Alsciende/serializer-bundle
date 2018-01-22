@@ -69,7 +69,7 @@ class ImportingService
     {
         $result = [];
         foreach ($this->storingService->retrieveBlocks($source, $defaultPath) as $block) {
-            if($this->logger instanceof LoggerInterface) {
+            if ($this->logger instanceof LoggerInterface) {
                 $this->logger->info('Successfully imported block', ['path' => $block->getPath()]);
             }
 
@@ -88,7 +88,7 @@ class ImportingService
     {
         $result = [];
         foreach ($this->encodingService->decode($block) as $fragment) {
-            if($this->logger instanceof LoggerInterface) {
+            if ($this->logger instanceof LoggerInterface) {
                 $this->logger->debug('Successfully decoded fragment', $fragment->getData());
             }
 

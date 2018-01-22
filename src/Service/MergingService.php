@@ -22,15 +22,20 @@ class MergingService
     /** @var MetadataService $metadata */
     private $metadata;
 
+    /** @var PersistenceManager $persistenceManager */
+    private $persistenceManager;
+
     /** @var NormalizerManager $normalizer */
     private $normalizer;
 
     public function __construct (
         MetadataService $metadata,
+        PersistenceManager $persistenceManager,
         NormalizerManager $normalizer
     )
     {
         $this->metadata = $metadata;
+        $this->persistenceManager = $persistenceManager;
         $this->normalizer = $normalizer;
     }
 
@@ -55,7 +60,7 @@ class MergingService
     {
         $className = $fragment->getBlock()->getSource()->getClassName();
 
-        $entity = $this->metadata->findManaged($className, $fragment->getEntity());
+        $entity = $this->persistenceManager->findManaged($className, $fragment->getEntity());
 
         $modifiedProperties = $this->filterModifiedProperties(
             $className,
@@ -64,7 +69,7 @@ class MergingService
             $fragment->getBlock()->getSource()->getProperties()
         );
 
-        if(count($modifiedProperties)) {
+        if (count($modifiedProperties)) {
             $this->logger->notice(sprintf('Data change from [%s]', $fragment->getBlock()->getPath()), $modifiedProperties);
 
             foreach ($modifiedProperties as $field => $value) {
@@ -78,15 +83,15 @@ class MergingService
     /**
      * @param string $className
      * @param object $entity
-     * @param array $data
-     * @param array $propertyMap
+     * @param array  $data
+     * @param array  $propertyMap
      * @return array
      * @throws UnknownTypeException
      */
-    private function filterModifiedProperties($className, $entity, $data, $propertyMap)
+    private function filterModifiedProperties ($className, $entity, $data, $propertyMap)
     {
-        foreach($propertyMap as $property => $type) {
-            if($this->normalizer->getNormalizer($type)->isEqual(
+        foreach ($propertyMap as $property => $type) {
+            if ($this->normalizer->getNormalizer($type)->isEqual(
                 $data[$property],
                 $this->metadata->getFieldValue($className, $entity, $property)
             )) {

@@ -4,11 +4,17 @@ services:
         Alsciende\SerializerBundle\Service\Normalizer\NormalizerInterface:
             tags: ['skizzle.normalizer']
 
+    doctrine.orm.metadata_factory:
+        class: Doctrine\ORM\Mapping\ClassMetadataFactory
+        factory: ["@doctrine.orm.entity_manager", getMetadataFactory]
+
     Alsciende\SerializerBundle\Service\:
         resource: '../../../src/Service/*'
         autowire: true
         autoconfigure: true
         public: false
+        bind:
+            $metadataFactory: '@doctrine.orm.metadata_factory'
 
     Alsciende\SerializerBundle\Service\NormalizerManager:
         arguments: [!tagged skizzle.normalizer]

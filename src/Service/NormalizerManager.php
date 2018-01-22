@@ -28,10 +28,11 @@ class NormalizerManager
 
     /**
      * @param string $className
-     * @param array $propertyMap
-     * @param array $data
+     * @param array  $propertyMap
+     * @param array  $data
+     * @return array
      */
-    public function normalize($className, $propertyMap, $data)
+    public function normalize ($className, $propertyMap, $data)
     {
         $result = [];
 
@@ -50,7 +51,7 @@ class NormalizerManager
     public function getNormalizer ($type)
     {
         $normalizer = $this->normalizers[$type];
-        if(!$normalizer instanceof NormalizerInterface) {
+        if (!$normalizer instanceof NormalizerInterface) {
             throw new UnknownTypeException($type);
         }
 

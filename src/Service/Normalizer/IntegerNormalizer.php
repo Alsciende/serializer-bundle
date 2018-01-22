@@ -17,7 +17,7 @@ class IntegerNormalizer extends AbstractNormalizer implements NormalizerInterfac
     /**
      * @param string $className
      * @param string $fieldName
-     * @param array $data
+     * @param array  $data
      * @return integer
      */
     public function normalize ($className, $fieldName, $data)

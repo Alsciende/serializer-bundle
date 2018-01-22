@@ -19,7 +19,7 @@ class DateNormalizer extends AbstractNormalizer implements NormalizerInterface
     /**
      * @param string $className
      * @param string $fieldName
-     * @param array $data
+     * @param array  $data
      * @return \DateTime
      */
     public function normalize ($className, $fieldName, $data)

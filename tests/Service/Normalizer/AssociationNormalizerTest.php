@@ -12,6 +12,8 @@ use Alsciende\SerializerBundle\Service\MetadataService;
 use Alsciende\SerializerBundle\Service\Normalizer\AssociationNormalizer;
 use Alsciende\SerializerBundle\Test\Resources\Entity\Album;
 use Alsciende\SerializerBundle\Test\Resources\Entity\Artist;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Proxy\ProxyFactory;
 use PHPUnit\Framework\TestCase;
 
 class AssociationNormalizerTest extends TestCase
@@ -21,8 +23,8 @@ class AssociationNormalizerTest extends TestCase
 
     protected function setUp ()
     {
-        $stub = $this->createMock(MetadataService::class);
-        $stub
+        $metadataService = $this->createMock(MetadataService::class);
+        $metadataService
             ->method('getAssociationMapping')
             ->willReturn([
                 'isOwningSide' => true,
@@ -31,11 +33,13 @@ class AssociationNormalizerTest extends TestCase
                 ],
                 'targetEntity' => Artist::class,
             ]);
-        $stub
+
+        $entityManager = $this->createMock(EntityManager::class);
+        $entityManager
             ->method('getReference')
             ->will($this->returnArgument(1));
 
-        $this->service = new AssociationNormalizer($stub);
+        $this->service = new AssociationNormalizer($metadataService, $entityManager);
     }
 
     public function testSupports ()

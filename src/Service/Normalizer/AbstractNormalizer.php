@@ -28,11 +28,11 @@ abstract class AbstractNormalizer
     /**
      * @param string $className
      * @param string $fieldName
-     * @param array $data
+     * @param array  $data
      * @return mixed
      * @throws MissingPropertyException
      */
-    protected function getRawValue($className, $fieldName, $data)
+    protected function getRawValue ($className, $fieldName, $data)
     {
         $columnName = $this->metadata->getColumnName($className, $fieldName);
 

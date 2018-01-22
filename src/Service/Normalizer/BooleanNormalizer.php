@@ -17,7 +17,7 @@ class BooleanNormalizer extends AbstractNormalizer implements NormalizerInterfac
     /**
      * @param string $className
      * @param string $fieldName
-     * @param array $data
+     * @param array  $data
      * @return bool
      */
     public function normalize ($className, $fieldName, $data)

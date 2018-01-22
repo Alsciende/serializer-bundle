@@ -23,7 +23,8 @@ class ScanningService
     public function __construct (
         MetadataService $metadataService,
         Reader $reader
-    ) {
+    )
+    {
         $this->metadataService = $metadataService;
         $this->reader = $reader;
     }
@@ -64,7 +65,7 @@ class ScanningService
     }
 
     /**
-     * @param Skizzle $annotation
+     * @param Skizzle          $annotation
      * @param \ReflectionClass $reflectionClass
      * @return Source
      */
