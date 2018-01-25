@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: cedric
- * Date: 15/01/18
- * Time: 13:54
- */
+declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Exception;
 use Alsciende\SerializerBundle\Model\Block;

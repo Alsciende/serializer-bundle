@@ -23,7 +23,7 @@ class EncodingService
      * @throws FailedDecodingException
      * @throws InvalidBlockDataException
      */
-    public function decode (Block $block)
+    public function decode (Block $block): array
     {
         $list = json_decode($block->getData(), true);
         if (json_last_error() !== JSON_ERROR_NONE) {
@@ -47,7 +47,7 @@ class EncodingService
      * @throws BreakValueMismatchException
      * @return array
      */
-    private function applyBreak (Block $block, array $data)
+    private function applyBreak (Block $block, array $data): array
     {
         $break = $block->getSource()->getBreak();
         if (isset($break)) {

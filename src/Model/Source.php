@@ -42,7 +42,7 @@ class Source
     /**
      * @return bool
      */
-    public function hasBreak ()
+    public function hasBreak (): bool
     {
         return isset($this->break);
     }
@@ -51,7 +51,7 @@ class Source
      *
      * @return string
      */
-    function getClassName ()
+    function getClassName (): string
     {
         return $this->className;
     }
@@ -61,7 +61,7 @@ class Source
      *
      * @return array
      */
-    public function getProperties ()
+    public function getProperties (): array
     {
         return $this->properties;
     }
@@ -73,7 +73,7 @@ class Source
      * @param string $type
      * @return $this
      */
-    public function addProperty ($name, $type)
+    public function addProperty ($name, $type): self
     {
         $this->properties[$name] = $type;
 
@@ -83,7 +83,7 @@ class Source
     /**
      * @return Block[]
      */
-    public function getBlocks ()
+    public function getBlocks (): array
     {
         return $this->blocks;
     }
@@ -92,7 +92,7 @@ class Source
      * @param Block $block
      * @return $this
      */
-    public function addBlock (Block $block)
+    public function addBlock (Block $block): self
     {
         $this->blocks[] = $block;
         $block->setSource($this);

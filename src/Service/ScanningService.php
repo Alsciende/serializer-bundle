@@ -33,7 +33,7 @@ class ScanningService
     /**
      * @return Source[]
      */
-    public function findSources ()
+    public function findSources (): array
     {
         $sources = [];
 
@@ -70,7 +70,7 @@ class ScanningService
      * @param \ReflectionClass $reflectionClass
      * @return Source
      */
-    private function buildSource (Skizzle $annotation, \ReflectionClass $reflectionClass)
+    private function buildSource (Skizzle $annotation, \ReflectionClass $reflectionClass): Source
     {
         $source = new Source($reflectionClass->getName(), $annotation->break);
 

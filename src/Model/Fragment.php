@@ -40,7 +40,7 @@ class Fragment
      *
      * @return array
      */
-    public function getData ()
+    public function getData (): array
     {
         return $this->data;
     }
@@ -49,7 +49,7 @@ class Fragment
      *
      * @return Block
      */
-    public function getBlock ()
+    public function getBlock (): Block
     {
         return $this->block;
     }
@@ -67,7 +67,7 @@ class Fragment
      *
      * @return $this
      */
-    public function setEntity ($entity)
+    public function setEntity ($entity): self
     {
         $this->entity = $entity;
 
@@ -77,7 +77,7 @@ class Fragment
     /**
      * @return array
      */
-    public function getNormalizedData ()
+    public function getNormalizedData (): array
     {
         return $this->normalizedData;
     }
@@ -87,7 +87,7 @@ class Fragment
      *
      * @return $this
      */
-    public function setNormalizedData ($normalizedData)
+    public function setNormalizedData ($normalizedData): self
     {
         $this->normalizedData = $normalizedData;
 

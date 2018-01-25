@@ -33,7 +33,7 @@ class NormalizerManager
      * @param array  $data
      * @return array
      */
-    public function normalize (string $className, array $propertyMap, array $data)
+    public function normalize (string $className, array $propertyMap, array $data): array
     {
         $result = [];
 
@@ -49,7 +49,7 @@ class NormalizerManager
      * @return NormalizerInterface
      * @throws UnknownTypeException
      */
-    public function getNormalizer (string $type)
+    public function getNormalizer (string $type): NormalizerInterface
     {
         $normalizer = $this->normalizers[$type];
         if (!$normalizer instanceof NormalizerInterface) {

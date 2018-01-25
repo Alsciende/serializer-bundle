@@ -53,7 +53,7 @@ class ImportingService
      *
      * @return $this
      */
-    public function setLogger (LoggerInterface $logger)
+    public function setLogger (LoggerInterface $logger): self
     {
         $this->logger = $logger;
 
@@ -66,7 +66,7 @@ class ImportingService
      * @param string $defaultPath
      * @return Fragment[]
      */
-    public function importSource (Source $source, string $defaultPath)
+    public function importSource (Source $source, string $defaultPath): array
     {
         $result = [];
         foreach ($this->storingService->retrieveBlocks($source, $defaultPath) as $block) {
@@ -85,7 +85,7 @@ class ImportingService
      * @param Block $block
      * @return Fragment[]
      */
-    public function importBlock (Block $block)
+    public function importBlock (Block $block): array
     {
         $result = [];
         foreach ($this->encodingService->decode($block) as $fragment) {
@@ -104,7 +104,7 @@ class ImportingService
      * @param Fragment $fragment
      * @return Fragment
      */
-    public function importFragment (Fragment $fragment)
+    public function importFragment (Fragment $fragment): Fragment
     {
         $className = $fragment->getBlock()->getSource()->getClassName();
 

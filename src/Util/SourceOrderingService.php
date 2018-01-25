@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Util;
 
+use Alsciende\SerializerBundle\Exception\DependencyCycleException;
 use Alsciende\SerializerBundle\Model\Source;
 use Alsciende\SerializerBundle\Service\MetadataService;
 
@@ -31,7 +32,7 @@ class SourceOrderingService
      * @param Source[] $sources
      * @return Source[]
      */
-    public function orderSources (array $sources)
+    public function orderSources (array $sources): array
     {
         $resolvedSources = [];
         $this->resolvedClassNames = [];
@@ -39,7 +40,7 @@ class SourceOrderingService
         while (count($sources) > 0) {
             $next = $this->findNextResolvedSource($sources);
             if ($next === null) {
-                throw $this->createDependencyCycleException($sources);
+                throw new DependencyCycleException();
             }
 
             /** @var Source $source */
@@ -74,7 +75,7 @@ class SourceOrderingService
      * @param string $className
      * @return boolean
      */
-    private function allTargetClassesAreResolved (string $className)
+    private function allTargetClassesAreResolved (string $className): bool
     {
         $targetClasses = $this->metadataAdapter->getAllTargetClasses($className);
         foreach (array_values($targetClasses) as $targetClass) {
@@ -84,17 +85,5 @@ class SourceOrderingService
         }
 
         return true;
-    }
-
-    /**
-     * @param array $sources
-     * @return \InvalidArgumentException
-     */
-    private function createDependencyCycleException (array $sources)
-    {
-        $unresolvedClasses = array_map(function (Source $source) {
-            return $source->getClassName();
-        }, $sources);
-        return new \InvalidArgumentException("Sources contain a cycle of dependencies, or a dependency is not configured as a Source.\nUnresolved classes are: " . implode(", ", $unresolvedClasses) . ".\nResolved classes are : " . implode(", ", $this->resolvedClassNames) . ".");
     }
 }

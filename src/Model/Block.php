@@ -50,7 +50,7 @@ class Block
      *
      * @return Source
      */
-    public function getSource ()
+    public function getSource (): Source
     {
         return $this->source;
     }
@@ -68,7 +68,7 @@ class Block
      *
      * @return string
      */
-    public function getData ()
+    public function getData (): string
     {
         return $this->data;
     }
@@ -77,7 +77,7 @@ class Block
      *
      * @return string
      */
-    public function getName ()
+    public function getName (): string
     {
         return $this->name;
     }
@@ -87,7 +87,7 @@ class Block
      * @param Source $source
      * @return $this
      */
-    public function setSource (Source $source)
+    public function setSource (Source $source): self
     {
         $this->source = $source;
 
@@ -99,7 +99,7 @@ class Block
      * @param string $name
      * @return $this
      */
-    public function setName ($name)
+    public function setName ($name): self
     {
         $this->name = $name;
 
