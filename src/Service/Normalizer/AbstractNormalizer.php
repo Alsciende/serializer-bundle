@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: cedric
- * Date: 19/01/18
- * Time: 16:16
- */
+declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Service\Normalizer;
 

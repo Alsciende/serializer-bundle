@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: cedric
- * Date: 22/01/18
- * Time: 11:44
- */
+declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Service;
 

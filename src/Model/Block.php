@@ -1,4 +1,5 @@
 <?php
+declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Model;
 
@@ -39,8 +40,8 @@ class Block
     public function __construct ($data, $path = null)
     {
         $this->data = $data;
-        $this->path = realpath($path);
         if (isset($path)) {
+            $this->path = realpath($path);
             $this->name = pathinfo($path, PATHINFO_FILENAME);
         }
     }
