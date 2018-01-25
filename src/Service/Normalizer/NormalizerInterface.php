@@ -19,7 +19,7 @@ interface NormalizerInterface
      * @return mixed
      * @throws MissingPropertyException
      */
-    public function normalize ($className, $fieldName, $data);
+    public function normalize (string $className, string $fieldName, array $data);
 
     /**
      * @param mixed $a

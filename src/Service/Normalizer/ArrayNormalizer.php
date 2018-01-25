@@ -21,7 +21,7 @@ class ArrayNormalizer extends AbstractNormalizer implements NormalizerInterface
      * @param array  $data
      * @return array
      */
-    public function normalize ($className, $fieldName, $data)
+    public function normalize (string $className, string $fieldName, array $data)
     {
         $rawValue = $this->getRawValue($className, $fieldName, $data);
 

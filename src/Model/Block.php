@@ -37,7 +37,7 @@ class Block
      * @param string      $data
      * @param string|null $path
      */
-    public function __construct ($data, $path = null)
+    public function __construct (string $data, string $path = null)
     {
         $this->data = $data;
         if (isset($path)) {

@@ -10,7 +10,6 @@ namespace Alsciende\SerializerBundle\Model;
  */
 class Source
 {
-
     /** @var string|null $break */
     private $break;
 
@@ -23,7 +22,7 @@ class Source
     /** @var Block[] $blocks */
     private $blocks;
 
-    public function __construct ($className, $break = null)
+    public function __construct (string $className, string $break = null)
     {
         $this->className = $className;
         $this->break = $break;

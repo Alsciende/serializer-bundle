@@ -24,7 +24,7 @@ class FailedDecodingException extends \Exception
      * @param string $data
      * @param string $message
      */
-    public function __construct ($format, $data, $message)
+    public function __construct (string $format, string $data, string $message)
     {
         $this->format = $format;
         $this->data = $data;

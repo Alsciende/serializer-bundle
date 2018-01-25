@@ -47,7 +47,7 @@ class EncodingService
      * @throws BreakValueMismatchException
      * @return array
      */
-    private function applyBreak (Block $block, $data)
+    private function applyBreak (Block $block, array $data)
     {
         $break = $block->getSource()->getBreak();
         if (isset($break)) {

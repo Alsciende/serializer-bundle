@@ -83,7 +83,7 @@ class MergingService
      * @return array
      * @throws UnknownTypeException
      */
-    private function filterModifiedProperties ($className, $entity, $data, $propertyMap)
+    private function filterModifiedProperties (string $className, $entity, array $data, array $propertyMap)
     {
         foreach ($propertyMap as $property => $type) {
             if ($this->normalizer->getNormalizer($type)->isEqual(

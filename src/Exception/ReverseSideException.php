@@ -9,7 +9,12 @@ namespace Alsciende\SerializerBundle\Exception;
  */
 class ReverseSideException extends \Exception
 {
-    public function __construct ($className, $fieldName)
+    /**
+     * ReverseSideException constructor.
+     * @param string $className
+     * @param string $fieldName
+     */
+    public function __construct (string $className, string $fieldName)
     {
         parent::__construct(sprintf(
             'Field [%s] is reverse side in class [%s]. Excepting owning side.',

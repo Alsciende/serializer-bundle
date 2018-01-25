@@ -10,7 +10,6 @@ namespace Alsciende\SerializerBundle\Model;
  */
 class Fragment
 {
-
     /**
      * @var array
      */
@@ -31,7 +30,7 @@ class Fragment
      */
     private $entity;
 
-    public function __construct (Block $block, $data)
+    public function __construct (Block $block, array $data)
     {
         $this->block = $block;
         $this->data = $data;

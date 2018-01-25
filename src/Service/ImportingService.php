@@ -66,7 +66,7 @@ class ImportingService
      * @param string $defaultPath
      * @return Fragment[]
      */
-    public function importSource (Source $source, $defaultPath)
+    public function importSource (Source $source, string $defaultPath)
     {
         $result = [];
         foreach ($this->storingService->retrieveBlocks($source, $defaultPath) as $block) {

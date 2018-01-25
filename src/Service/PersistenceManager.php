@@ -24,7 +24,7 @@ class PersistenceManager
      * @param object $entity
      * @return object
      */
-    public function findManaged ($className, $entity)
+    public function findManaged (string $className, $entity)
     {
         $classMetadata = $this->entityManager->getClassMetadata($className);
         $id = $classMetadata->getIdentifierValues($entity);

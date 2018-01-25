@@ -12,14 +12,14 @@ namespace Alsciende\SerializerBundle\Exception;
  */
 class InvalidBlockDataException extends \Exception
 {
-    /** @var mixed $data */
+    /** @var string $data */
     private $data;
 
     /**
      * InvalidBlockDataException constructor.
-     * @param mixed $data
+     * @param string $data
      */
-    public function __construct ($data)
+    public function __construct (string $data)
     {
         $this->data = $data;
         parent::__construct('Block data cannot be decoded to a numeric array.');

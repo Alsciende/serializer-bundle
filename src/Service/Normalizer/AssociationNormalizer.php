@@ -35,7 +35,7 @@ class AssociationNormalizer extends AbstractNormalizer implements NormalizerInte
      * @param array  $data
      * @return object|null
      */
-    public function normalize ($className, $fieldName, $data)
+    public function normalize (string $className, string $fieldName, array $data)
     {
         $associationMapping = $this->metadata->getAssociationMapping($className, $fieldName);
 

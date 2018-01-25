@@ -54,7 +54,7 @@ class ScanningService
      * @param string $className
      * @return Source|null
      */
-    public function buildFromClass ($className)
+    public function buildFromClass (string $className)
     {
         $reflectionClass = new \ReflectionClass($className);
         $annotation = $this->reader->getClassAnnotation($reflectionClass, Skizzle::class);

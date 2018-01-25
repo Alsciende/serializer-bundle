@@ -23,7 +23,7 @@ class MissingPropertyException extends \Exception
      * @param array $data
      * @param string $columnName
      */
-    public function __construct ($data, $columnName)
+    public function __construct (array $data, string $columnName)
     {
         $this->data = $data;
         $this->columnName = $columnName;

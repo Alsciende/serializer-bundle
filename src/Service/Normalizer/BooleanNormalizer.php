@@ -21,7 +21,7 @@ class BooleanNormalizer extends AbstractNormalizer implements NormalizerInterfac
      * @param array  $data
      * @return bool
      */
-    public function normalize ($className, $fieldName, $data)
+    public function normalize (string $className, string $fieldName, array $data)
     {
         $rawValue = $this->getRawValue($className, $fieldName, $data);
 

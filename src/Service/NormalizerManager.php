@@ -20,7 +20,7 @@ class NormalizerManager
      * NormalizerManager constructor.
      * @param NormalizerInterface[] $normalizers
      */
-    public function __construct ($normalizers)
+    public function __construct (iterable $normalizers)
     {
         foreach ($normalizers as $normalizer) {
             $this->normalizers[$normalizer->supports()] = $normalizer;
@@ -33,7 +33,7 @@ class NormalizerManager
      * @param array  $data
      * @return array
      */
-    public function normalize ($className, $propertyMap, $data)
+    public function normalize (string $className, array $propertyMap, array $data)
     {
         $result = [];
 
@@ -49,7 +49,7 @@ class NormalizerManager
      * @return NormalizerInterface
      * @throws UnknownTypeException
      */
-    public function getNormalizer ($type)
+    public function getNormalizer (string $type)
     {
         $normalizer = $this->normalizers[$type];
         if (!$normalizer instanceof NormalizerInterface) {

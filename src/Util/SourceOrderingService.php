@@ -31,7 +31,7 @@ class SourceOrderingService
      * @param Source[] $sources
      * @return Source[]
      */
-    public function orderSources ($sources)
+    public function orderSources (array $sources)
     {
         $resolvedSources = [];
         $this->resolvedClassNames = [];
@@ -57,7 +57,7 @@ class SourceOrderingService
      * @param Source[] $sources
      * @return integer|null
      */
-    private function findNextResolvedSource ($sources)
+    private function findNextResolvedSource (array $sources)
     {
         foreach ($sources as $index => $source) {
             if ($this->allTargetClassesAreResolved($source->getClassName())) {
@@ -74,7 +74,7 @@ class SourceOrderingService
      * @param string $className
      * @return boolean
      */
-    private function allTargetClassesAreResolved ($className)
+    private function allTargetClassesAreResolved (string $className)
     {
         $targetClasses = $this->metadataAdapter->getAllTargetClasses($className);
         foreach (array_values($targetClasses) as $targetClass) {
@@ -90,7 +90,7 @@ class SourceOrderingService
      * @param array $sources
      * @return \InvalidArgumentException
      */
-    private function createDependencyCycleException ($sources)
+    private function createDependencyCycleException (array $sources)
     {
         $unresolvedClasses = array_map(function (Source $source) {
             return $source->getClassName();

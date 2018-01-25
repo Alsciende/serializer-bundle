@@ -43,7 +43,7 @@ class MetadataService
      * @param string $className
      * @return string[]
      */
-    public function getAllTargetClasses ($className)
+    public function getAllTargetClasses (string $className)
     {
         $result = [];
 
@@ -62,7 +62,7 @@ class MetadataService
      * @param string $fieldName
      * @return string
      */
-    public function getColumnName ($className, $fieldName)
+    public function getColumnName (string $className, string $fieldName)
     {
         $classMetadata = $this->getMetadataFor($className);
 
@@ -75,7 +75,7 @@ class MetadataService
      * @return array
      * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    public function getAssociationMapping ($className, $fieldName)
+    public function getAssociationMapping (string $className, string $fieldName)
     {
         $classMetadata = $this->getMetadataFor($className);
 
@@ -87,7 +87,7 @@ class MetadataService
      * @param array  $data
      * @return object
      */
-    public function hydrate ($className, $data)
+    public function hydrate (string $className, array $data)
     {
         $entity = new $className;
         $classMetadata = $this->getMetadataFor($className);
@@ -104,7 +104,7 @@ class MetadataService
      * @param string $fieldName
      * @return mixed
      */
-    public function getFieldValue ($className, $entity, $fieldName)
+    public function getFieldValue (string $className, $entity, string $fieldName)
     {
         return $this->getMetadataFor($className)->getFieldValue($entity, $fieldName);
     }
@@ -116,7 +116,7 @@ class MetadataService
      * @param mixed  $value
      * @return void
      */
-    public function setFieldValue ($className, $entity, $fieldName, $value)
+    public function setFieldValue (string $className, $entity, string $fieldName, $value)
     {
         $this->getMetadataFor($className)->setFieldValue($entity, $fieldName, $value);
     }
@@ -133,7 +133,7 @@ class MetadataService
      * @param string $className
      * @return ClassMetadata
      */
-    private function getMetadataFor ($className)
+    private function getMetadataFor (string $className)
     {
         $metadata = $this->metadataFactory->getMetadataFor($className);
         if ($metadata instanceof ClassMetadata) {

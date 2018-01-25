@@ -16,7 +16,7 @@ class UnknownTypeException extends \Exception
      * UnknownTypeException constructor.
      * @param string $type
      */
-    public function __construct ($type)
+    public function __construct (string $type)
     {
         $this->type = $type;
         parent::__construct('Unknown type in annotation.');
