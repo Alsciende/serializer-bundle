@@ -84,22 +84,6 @@ class MetadataService
 
     /**
      * @param string $className
-     * @param array  $data
-     * @return object
-     */
-    public function hydrate (string $className, array $data)
-    {
-        $entity = new $className;
-        $classMetadata = $this->getMetadataFor($className);
-        foreach ($data as $field => $value) {
-            $classMetadata->setFieldValue($entity, $field, $value);
-        }
-
-        return $entity;
-    }
-
-    /**
-     * @param string $className
      * @param object $entity
      * @param string $fieldName
      * @return mixed

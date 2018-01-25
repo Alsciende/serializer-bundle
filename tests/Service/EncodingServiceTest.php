@@ -37,7 +37,7 @@ class EncodingServiceTest extends TestCase
 
         $this->assertCount(1, $fragments);
         $this->assertInstanceOf(Fragment::class, $fragments[0]);
-        $this->assertArrayHasKey('name', $fragments[0]->getData());
-        $this->assertEquals('Pink Floyd', $fragments[0]->getData()['name']);
+        $this->assertArrayHasKey('name', $fragments[0]->getRawData());
+        $this->assertEquals('Pink Floyd', $fragments[0]->getRawData()['name']);
     }
 }

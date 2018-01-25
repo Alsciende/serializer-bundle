@@ -11,14 +11,14 @@ namespace Alsciende\SerializerBundle\Model;
 class Fragment
 {
     /**
-     * @var array
-     */
-    private $data;
-
-    /**
      * @var Block
      */
     private $block;
+
+    /**
+     * @var array
+     */
+    private $rawData;
 
     /**
      * @var array
@@ -33,16 +33,16 @@ class Fragment
     public function __construct (Block $block, array $data)
     {
         $this->block = $block;
-        $this->data = $data;
+        $this->rawData = $data;
     }
 
     /**
      *
      * @return array
      */
-    public function getData (): array
+    public function getRawData (): array
     {
-        return $this->data;
+        return $this->rawData;
     }
 
     /**

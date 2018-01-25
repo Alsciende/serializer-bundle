@@ -20,9 +20,9 @@ For each file read, `EncodingService` decodes the file as an array of JSON objec
 
 For each data array (json object) decoded, `NormalizerManager` uses the `@Skizzle\Field` annotations to transform the serialized value of each key/value pair as a value of the expected type.
 
-### Hydratation
+### Hydration
 
-Each data array is then hydrated into a PHP object of the correct class by `MetadataService`.
+Each data array is then hydrated into a PHP object of the correct class by `HydrationService`.
 
 At that point, all the JSON data is transformed in PHP objects that can be validated, serialized, etc.
 
@@ -32,7 +32,7 @@ Each object is merged with the database by `MergingService`. The result is a man
 
 ### Importer
 
-The `ImporterService` service takes a Source and returns an array of php objects. It bundles the calls to `StoringService`, `EncodingService`, `NormalizerManager` and `MetadataService`. 
+The `ImporterService` service takes a Source and returns an array of php objects. It bundles the calls to `StoringService`, `EncodingService`, `NormalizerManager` and `HydrationService`. 
 
 ## Example
 

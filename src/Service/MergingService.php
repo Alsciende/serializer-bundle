@@ -20,13 +20,13 @@ class MergingService
     /** @var PersistenceManager $persistenceManager */
     private $persistenceManager;
 
-    /** @var NormalizerManager $normalizer */
+    /** @var NormalizerService $normalizer */
     private $normalizer;
 
     public function __construct (
         MetadataService $metadata,
         PersistenceManager $persistenceManager,
-        NormalizerManager $normalizer
+        NormalizerService $normalizer
     )
     {
         $this->metadata = $metadata;

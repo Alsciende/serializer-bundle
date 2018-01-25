@@ -16,5 +16,5 @@ services:
         bind:
             $metadataFactory: '@doctrine.orm.metadata_factory'
 
-    Alsciende\SerializerBundle\Service\NormalizerManager:
+    Alsciende\SerializerBundle\Service\NormalizerService:
         arguments: [!tagged skizzle.normalizer]

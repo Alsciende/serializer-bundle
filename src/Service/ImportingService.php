@@ -18,34 +18,33 @@ class ImportingService
     /** @var LoggerInterface $logger */
     private $logger;
 
-    /** @var ScanningService $scanningService */
-    private $scanningService;
+    /** @var ScanningService $scanner */
+    private $scanner;
 
-    /** @var StoringService $storingService */
-    private $storingService;
+    /** @var StoringService $storer */
+    private $storer;
 
-    /** @var EncodingService $encodingService */
-    private $encodingService;
+    /** @var EncodingService $encoder */
+    private $encoder;
 
-    /** @var NormalizerManager $normalizerManager */
-    private $normalizerManager;
+    /** @var NormalizerService $normalizer */
+    private $normalizer;
 
-    /** @var MetadataService $metadataService */
-    private $metadataService;
+    /** @var HydrationService $hydrator */
+    private $hydrator;
 
     public function __construct (
         ScanningService $scanningService,
         StoringService $storingService,
         EncodingService $encodingService,
-        NormalizerManager $normalizerManager,
-        MetadataService $metadataService
-    )
-    {
-        $this->scanningService = $scanningService;
-        $this->storingService = $storingService;
-        $this->encodingService = $encodingService;
-        $this->normalizerManager = $normalizerManager;
-        $this->metadataService = $metadataService;
+        NormalizerService $normalizerService,
+        HydrationService $hydrationService
+    ) {
+        $this->scanner = $scanningService;
+        $this->storer = $storingService;
+        $this->encoder = $encodingService;
+        $this->normalizer = $normalizerService;
+        $this->hydrator = $hydrationService;
     }
 
     /**
@@ -69,7 +68,7 @@ class ImportingService
     public function importSource (Source $source, string $defaultPath): array
     {
         $result = [];
-        foreach ($this->storingService->retrieveBlocks($source, $defaultPath) as $block) {
+        foreach ($this->storer->retrieveBlocks($source, $defaultPath) as $block) {
             if ($this->logger instanceof LoggerInterface) {
                 $this->logger->info('Successfully imported block', ['path' => $block->getPath()]);
             }
@@ -88,9 +87,9 @@ class ImportingService
     public function importBlock (Block $block): array
     {
         $result = [];
-        foreach ($this->encodingService->decode($block) as $fragment) {
+        foreach ($this->encoder->decode($block) as $fragment) {
             if ($this->logger instanceof LoggerInterface) {
-                $this->logger->debug('Successfully decoded fragment', $fragment->getData());
+                $this->logger->debug('Successfully decoded fragment', $fragment->getRawData());
             }
 
             $result[] = $this->importFragment($fragment);
@@ -106,14 +105,6 @@ class ImportingService
      */
     public function importFragment (Fragment $fragment): Fragment
     {
-        $className = $fragment->getBlock()->getSource()->getClassName();
-
-        $fragment->setNormalizedData($this->normalizerManager->normalize(
-            $className,
-            $fragment->getBlock()->getSource()->getProperties(),
-            $fragment->getData()
-        ));
-
-        return $fragment->setEntity($this->metadataService->hydrate($className, $fragment->getNormalizedData()));
+        return $this->hydrator->hydrate($this->normalizer->normalize($fragment));
     }
 }

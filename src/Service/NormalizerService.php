@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Alsciende\SerializerBundle\Service;
 
 use Alsciende\SerializerBundle\Exception\UnknownTypeException;
+use Alsciende\SerializerBundle\Model\Fragment;
 use Alsciende\SerializerBundle\Service\Normalizer\NormalizerInterface;
 
 /**
@@ -11,7 +12,7 @@ use Alsciende\SerializerBundle\Service\Normalizer\NormalizerInterface;
  *
  * @author Alsciende <alsciende@icloud.com>
  */
-class NormalizerManager
+class NormalizerService
 {
     /** @var NormalizerInterface[] $normalizers */
     private $normalizers;
@@ -28,12 +29,25 @@ class NormalizerManager
     }
 
     /**
+     * @param Fragment $fragment
+     * @return Fragment
+     */
+    public function normalize (Fragment $fragment): Fragment
+    {
+        return $fragment->setNormalizedData($this->getNormalizedData(
+            $fragment->getBlock()->getSource()->getClassName(),
+            $fragment->getBlock()->getSource()->getProperties(),
+            $fragment->getRawData()
+        ));
+    }
+
+    /**
      * @param string $className
      * @param array  $propertyMap
      * @param array  $data
      * @return array
      */
-    public function normalize (string $className, array $propertyMap, array $data): array
+    public function getNormalizedData (string $className, array $propertyMap, array $data): array
     {
         $result = [];
 
