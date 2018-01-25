@@ -1,16 +1,32 @@
 # serializer-bundle
 
-## Lexicon
+This Symfony bundle uses the Doctrine metadata and a few annotations of his own to import data from JSON files to the database.
 
-- reference: a key/value in some data that references another object's identifier, eg ['article_id' => 124]
-- referenceKey: the key of a reference, eg 'article_id'
-- referenceValue: the value of a reference, eg 124
+## Overview
 
-- association: a key/value in some data that references another object, eg ['article' => (object Article)]
-- associationKey: the key of an assocation, eg 'article'
-- associationValue: the value of an association, eg (object Article)
+### Source Discovery
 
-- targetClass: className of the referenced object, eg 'AcmeBundle\Entity\Article'
-- targetIdentifier: referenced identifier in targetClass, eg 'id'
+`ScanningService` uses the Doctrine ClassMetadataFactory to find all entity classes, then filters the ones that use the `@Skizzle` annotation.
 
-An association may require more than one reference to be resolved.
+### File Reader
+
+For each source discovered, `StoringService` reads the file(s) associated.
+
+### Decoder
+
+For each file read, `EncodingService` decodes the file as an array of JSON objects (ie associative arrays).
+
+### Fields Normalization
+
+For each data array (json object) decoded, `NormalizerManager` uses the `@Skizzle\Field` annotations to transform the serialized value of each key/value pair as a value of the expected type.
+
+### Hydratation
+
+Each data array is then hydrated into a PHP object of the correct class by `MetadataService`.
+
+At that point, all the JSON data is transformed in PHP objects that can be validated, serialized, etc.
+
+### Merging
+
+Each object is merged with the database by `MergingService`. The result is a managed entity whose properties have been updated if they were present in the JSON data. 
+

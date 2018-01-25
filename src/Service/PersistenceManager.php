@@ -36,12 +36,12 @@ class PersistenceManager
 
         $obj = $this->entityManager->find($className, $id);
 
-        if($obj === null) {
+        if($obj instanceof $className) {
+            $this->entityManager->initializeObject($obj);
+        } else {
             $obj = new $className;
             $classMetadata->setIdentifierValues($obj, $id);
             $this->entityManager->persist($obj);
-        } else {
-            $this->entityManager->initializeObject($obj);
         }
 
         return $obj;
