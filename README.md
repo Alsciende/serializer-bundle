@@ -30,3 +30,23 @@ At that point, all the JSON data is transformed in PHP objects that can be valid
 
 Each object is merged with the database by `MergingService`. The result is a managed entity whose properties have been updated if they were present in the JSON data. 
 
+### Importer
+
+The `ImporterService` service takes a Source and returns an array of php objects. It bundles the calls to `StoringService`, `EncodingService`, `NormalizerManager` and `MetadataService`. 
+
+## Example
+
+```php
+$sources = $scanning->findSources();
+
+foreach ($sources as $source) {
+    $fragments = $importer->importSource($source, $this->jsonDataPath);
+      
+    foreach ($fragments as $fragment) {
+        $validator->validate($fragment->getEntity());
+        $merging->merge($fragment);
+    }
+    
+    $entityManager->flush();
+}
+```
