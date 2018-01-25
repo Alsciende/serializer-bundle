@@ -116,7 +116,7 @@ class MetadataService
      * @param mixed  $value
      * @return void
      */
-    public function setFieldValue (string $className, $entity, string $fieldName, $value): void
+    public function setFieldValue (string $className, $entity, string $fieldName, $value)
     {
         $this->getMetadataFor($className)->setFieldValue($entity, $fieldName, $value);
     }

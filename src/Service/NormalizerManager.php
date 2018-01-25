@@ -20,7 +20,7 @@ class NormalizerManager
      * NormalizerManager constructor.
      * @param NormalizerInterface[] $normalizers
      */
-    public function __construct (iterable $normalizers)
+    public function __construct ($normalizers)
     {
         foreach ($normalizers as $normalizer) {
             $this->normalizers[$normalizer->supports()] = $normalizer;
