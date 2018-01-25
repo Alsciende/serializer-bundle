@@ -57,17 +57,17 @@ class MergingService
 
         $entity = $this->persistenceManager->findManaged($className, $fragment->getEntity());
 
-        $modifiedProperties = $this->filterModifiedProperties(
+        $changeSet = $this->getChangeSet(
             $className,
             $entity,
             $fragment->getNormalizedData(),
             $fragment->getBlock()->getSource()->getProperties()
         );
 
-        if (count($modifiedProperties)) {
-            $this->logger->notice(sprintf('Data change from [%s]', $fragment->getBlock()->getPath()), $modifiedProperties);
+        if (count($changeSet)) {
+            $this->logger->notice(sprintf('Data change from [%s]', $fragment->getBlock()->getPath()), $changeSet);
 
-            foreach ($modifiedProperties as $field => $value) {
+            foreach ($changeSet as $field => $value) {
                 $this->metadata->setFieldValue($className, $entity, $field, $value);
             }
         }
@@ -83,7 +83,7 @@ class MergingService
      * @return array
      * @throws UnknownTypeException
      */
-    private function filterModifiedProperties (string $className, $entity, array $data, array $propertyMap): array
+    private function getChangeSet (string $className, $entity, array $data, array $propertyMap): array
     {
         foreach ($propertyMap as $property => $type) {
             if ($this->normalizer->getNormalizer($type)->isEqual(
