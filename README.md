@@ -1,4 +1,4 @@
-# serializer-bundle
+# serializer-bundle [![Build Status](https://travis-ci.org/Alsciende/serializer-bundle.svg?branch=master)](https://travis-ci.org/Alsciende/serializer-bundle)
 
 This Symfony bundle uses the Doctrine metadata and a few annotations of his own to import data from JSON files to the database.
 
