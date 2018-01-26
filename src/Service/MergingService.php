@@ -17,20 +17,15 @@ class MergingService
     /** @var MetadataService $metadata */
     private $metadata;
 
-    /** @var PersistenceManager $persistenceManager */
-    private $persistenceManager;
-
     /** @var NormalizerService $normalizer */
     private $normalizer;
 
     public function __construct (
         MetadataService $metadata,
-        PersistenceManager $persistenceManager,
         NormalizerService $normalizer
     )
     {
         $this->metadata = $metadata;
-        $this->persistenceManager = $persistenceManager;
         $this->normalizer = $normalizer;
     }
 
@@ -47,15 +42,14 @@ class MergingService
     }
 
     /**
+     * @param object   $entity
      * @param Fragment $fragment
-     * @return null|object
+     * @return object
      * @throws UnknownTypeException
      */
-    public function merge (Fragment $fragment)
+    public function merge ($entity, Fragment $fragment)
     {
         $className = $fragment->getBlock()->getSource()->getClassName();
-
-        $entity = $this->persistenceManager->findManaged($className, $fragment->getEntity());
 
         $changeSet = $this->getChangeSet(
             $className,

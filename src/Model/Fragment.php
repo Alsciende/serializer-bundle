@@ -28,7 +28,7 @@ class Fragment
     /**
      * @var object
      */
-    private $entity;
+    private $hydratedEntity;
 
     public function __construct (Block $block, array $data)
     {
@@ -57,19 +57,19 @@ class Fragment
     /**
      * @return object
      */
-    public function getEntity ()
+    public function getHydratedEntity ()
     {
-        return $this->entity;
+        return $this->hydratedEntity;
     }
 
     /**
-     * @param object $entity
+     * @param object $hydratedEntity
      *
      * @return $this
      */
-    public function setEntity ($entity): self
+    public function setHydratedEntity ($hydratedEntity): self
     {
-        $this->entity = $entity;
+        $this->hydratedEntity = $hydratedEntity;
 
         return $this;
     }

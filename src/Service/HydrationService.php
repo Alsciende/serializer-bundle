@@ -23,7 +23,7 @@ class HydrationService
      */
     public function hydrate (Fragment $fragment): Fragment
     {
-        return $fragment->setEntity($this->getHydratedEntity(
+        return $fragment->setHydratedEntity($this->getHydratedEntity(
             $fragment->getBlock()->getSource()->getClassName(),
             $fragment->getNormalizedData()
         ));

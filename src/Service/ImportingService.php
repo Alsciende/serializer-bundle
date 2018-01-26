@@ -3,10 +3,12 @@ declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Service;
 
+use Alsciende\SerializerBundle\Exception\ValidationException;
 use Alsciende\SerializerBundle\Model\Block;
 use Alsciende\SerializerBundle\Model\Fragment;
 use Alsciende\SerializerBundle\Model\Source;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 /**
  * Description of Serializer
@@ -33,18 +35,34 @@ class ImportingService
     /** @var HydrationService $hydrator */
     private $hydrator;
 
+    /** @var PersistenceManager $persistence */
+    private $persistence;
+
+    /** @var MergingService $merging */
+    private $merging;
+
+    /** @var ValidatorInterface $validator */
+    private $validator;
+
     public function __construct (
         ScanningService $scanningService,
         StoringService $storingService,
         EncodingService $encodingService,
         NormalizerService $normalizerService,
-        HydrationService $hydrationService
-    ) {
+        HydrationService $hydrationService,
+        PersistenceManager $persistence,
+        MergingService $merging,
+        ValidatorInterface $validator
+    )
+    {
         $this->scanner = $scanningService;
         $this->storer = $storingService;
         $this->encoder = $encodingService;
         $this->normalizer = $normalizerService;
         $this->hydrator = $hydrationService;
+        $this->persistence = $persistence;
+        $this->merging = $merging;
+        $this->validator = $validator;
     }
 
     /**
@@ -60,15 +78,48 @@ class ImportingService
     }
 
     /**
-     *
+     * @param string $path
+     * @param bool   $usePersistence
+     * @throws ValidationException
+     */
+    public function import (string $path, bool $usePersistence = false)
+    {
+        $sources = $this->scanner->findSources();
+
+        foreach ($sources as $source) {
+            if ($usePersistence) {
+                $this->persistence->warmup($source);
+            }
+
+            $fragments = $this->importSource($source, $path);
+
+            foreach ($fragments as $fragment) {
+                $errors = $this->validator->validate($fragment->getHydratedEntity());
+                if (count($errors) > 0) {
+                    throw new ValidationException($fragment, $errors);
+                }
+
+                if ($usePersistence) {
+                    $entity = $this->persistence->findManaged($fragment->getHydratedEntity());
+                    $this->merging->merge($entity, $fragment);
+                }
+            }
+
+            if ($usePersistence) {
+                $this->persistence->commit();
+            }
+        }
+    }
+
+    /**
      * @param Source $source
-     * @param string $defaultPath
+     * @param string $path
      * @return Fragment[]
      */
-    public function importSource (Source $source, string $defaultPath): array
+    public function importSource (Source $source, string $path): array
     {
         $result = [];
-        foreach ($this->storer->retrieveBlocks($source, $defaultPath) as $block) {
+        foreach ($this->storer->retrieveBlocks($source, $path) as $block) {
             if ($this->logger instanceof LoggerInterface) {
                 $this->logger->info('Successfully imported block', ['path' => $block->getPath()]);
             }

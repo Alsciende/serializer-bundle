@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Service;
 
+use Alsciende\SerializerBundle\Model\Source;
 use Doctrine\ORM\EntityManagerInterface;
 
 /**
@@ -20,13 +21,13 @@ class PersistenceManager
     /**
      * Find the managed version of an entity
      *
-     * @param string $className
      * @param object $entity
      * @return object
      */
-    public function findManaged (string $className, $entity)
+    public function findManaged ($entity)
     {
-        $classMetadata = $this->entityManager->getClassMetadata($className);
+        $classMetadata = $this->entityManager->getClassMetadata(get_class($entity));
+        $className = $classMetadata->name;
         $id = $classMetadata->getIdentifierValues($entity);
 
         $obj = $this->entityManager->find($className, $id);
@@ -40,5 +41,21 @@ class PersistenceManager
         }
 
         return $obj;
+    }
+
+    /**
+     * @param Source $source
+     */
+    public function warmup(Source $source)
+    {
+        $this->entityManager->getRepository($source->getClassName())->findAll();
+    }
+
+    /**
+     *
+     */
+    public function commit()
+    {
+        $this->entityManager->flush();
     }
 }
