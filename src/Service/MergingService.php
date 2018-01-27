@@ -23,8 +23,7 @@ class MergingService
     public function __construct (
         MetadataService $metadata,
         NormalizerService $normalizer
-    )
-    {
+    ) {
         $this->metadata = $metadata;
         $this->normalizer = $normalizer;
     }
@@ -42,7 +41,7 @@ class MergingService
     }
 
     /**
-     * @param object   $entity
+     * @param object $entity
      * @param Fragment $fragment
      * @return object
      * @throws UnknownTypeException
@@ -59,7 +58,9 @@ class MergingService
         );
 
         if (count($changeSet)) {
-            $this->logger->notice(sprintf('Data change from [%s]', $fragment->getBlock()->getPath()), $changeSet);
+            if ($this->logger instanceof LoggerInterface) {
+                $this->logger->notice(sprintf('Data change from [%s]', $fragment->getBlock()->getPath()), $changeSet);
+            }
 
             foreach ($changeSet as $field => $value) {
                 $this->metadata->setFieldValue($className, $entity, $field, $value);
@@ -72,8 +73,8 @@ class MergingService
     /**
      * @param string $className
      * @param object $entity
-     * @param array  $data
-     * @param array  $propertyMap
+     * @param array $data
+     * @param array $propertyMap
      * @return array
      * @throws UnknownTypeException
      */

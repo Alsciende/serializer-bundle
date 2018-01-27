@@ -34,17 +34,19 @@ class NormalizerService
      */
     public function normalize (Fragment $fragment): Fragment
     {
-        return $fragment->setNormalizedData($this->getNormalizedData(
-            $fragment->getBlock()->getSource()->getClassName(),
-            $fragment->getBlock()->getSource()->getProperties(),
-            $fragment->getRawData()
-        ));
+        return $fragment->setNormalizedData(
+            $this->getNormalizedData(
+                $fragment->getBlock()->getSource()->getClassName(),
+                $fragment->getBlock()->getSource()->getProperties(),
+                $fragment->getRawData()
+            )
+        );
     }
 
     /**
      * @param string $className
-     * @param array  $propertyMap
-     * @param array  $data
+     * @param array $propertyMap
+     * @param array $data
      * @return array
      */
     public function getNormalizedData (string $className, array $propertyMap, array $data): array
