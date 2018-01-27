@@ -37,7 +37,6 @@ class PersistenceManager
         } else {
             $obj = new $className;
             $classMetadata->setIdentifierValues($obj, $id);
-            $this->entityManager->persist($obj);
         }
 
         return $obj;
@@ -57,5 +56,13 @@ class PersistenceManager
     public function commit()
     {
         $this->entityManager->flush();
+    }
+
+    /**
+     * @param object $entity
+     */
+    public function persist($entity)
+    {
+        $this->entityManager->persist($entity);
     }
 }

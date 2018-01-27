@@ -102,6 +102,7 @@ class ImportingService
                 if ($usePersistence) {
                     $entity = $this->persistence->findManaged($fragment->getHydratedEntity());
                     $this->merging->merge($entity, $fragment);
+                    $this->persistence->persist($entity);
                 }
             }
 
