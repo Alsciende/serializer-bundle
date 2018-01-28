@@ -8,6 +8,7 @@
 
 namespace Alsciende\SerializerBundle\Test\Service\Normalizer;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
 use Alsciende\SerializerBundle\Service\MetadataService;
 use Alsciende\SerializerBundle\Service\Normalizer\StringNormalizer;
 use Alsciende\SerializerBundle\Test\Resources\Entity\Artist;
@@ -40,7 +41,7 @@ class StringNormalizerTest extends TestCase
     {
         $this->assertEquals(
             '1965',
-            $this->service->normalize(Artist::class, 'foundedIn', ['founded_in' => '1965'])
+            $this->service->normalize(Artist::class, 'foundedIn', ['founded_in' => '1965'], new Field([]))
         );
     }
 
@@ -48,7 +49,7 @@ class StringNormalizerTest extends TestCase
     {
         $this->assertEquals(
             null,
-            $this->service->normalize(Artist::class, 'foundedIn', ['founded_in' => null])
+            $this->service->normalize(Artist::class, 'foundedIn', ['founded_in' => null], new Field([]))
         );
     }
 }

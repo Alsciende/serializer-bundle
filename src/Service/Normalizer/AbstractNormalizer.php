@@ -25,7 +25,7 @@ abstract class AbstractNormalizer
      * @param string $className
      * @param string $fieldName
      * @param array $data
-     * @param array $config
+     * @param Field $config
      * @return mixed
      * @throws MissingPropertyException
      */

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Test\Service;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
 use Alsciende\SerializerBundle\Service\MetadataService;
 use Alsciende\SerializerBundle\Service\Normalizer\DateNormalizer;
 use Alsciende\SerializerBundle\Service\NormalizerService;
@@ -32,7 +33,7 @@ class NormalizerServiceTest extends TestCase
 
         $result = $service->getNormalizedData(
             Album::class,
-            ['dateRelease' => 'date'],
+            ['dateRelease' => new Field(['type' => 'date'])],
             ['release_date' => '1973-03-01']
         );
 

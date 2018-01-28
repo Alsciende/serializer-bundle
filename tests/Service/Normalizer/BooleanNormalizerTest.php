@@ -8,6 +8,7 @@
 
 namespace Alsciende\SerializerBundle\Test\Service\Normalizer;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
 use Alsciende\SerializerBundle\Service\MetadataService;
 use Alsciende\SerializerBundle\Service\Normalizer\BooleanNormalizer;
 use Alsciende\SerializerBundle\Test\Resources\Entity\Label;
@@ -40,7 +41,7 @@ class BooleanNormalizerTest extends TestCase
     {
         $this->assertEquals(
             true,
-            $this->service->normalize(Label::class, 'active', ['is_active' => true])
+            $this->service->normalize(Label::class, 'active', ['is_active' => true], new Field([]))
         );
     }
 
@@ -48,7 +49,7 @@ class BooleanNormalizerTest extends TestCase
     {
         $this->assertEquals(
             null,
-            $this->service->normalize(Label::class, 'active', ['is_active' => null])
+            $this->service->normalize(Label::class, 'active', ['is_active' => null], new Field([]))
         );
     }
 }

@@ -8,6 +8,7 @@
 
 namespace Alsciende\SerializerBundle\Test\Service\Normalizer;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
 use Alsciende\SerializerBundle\Service\MetadataService;
 use Alsciende\SerializerBundle\Service\Normalizer\IntegerNormalizer;
 use Alsciende\SerializerBundle\Test\Resources\Entity\Album;
@@ -40,7 +41,7 @@ class IntegerNormalizerTest extends TestCase
     {
         $this->assertEquals(
             10,
-            $this->service->normalize(Album::class, 'nbTracks', ['nb_tracks' => 10])
+            $this->service->normalize(Album::class, 'nbTracks', ['nb_tracks' => 10], new Field([]))
         );
     }
 
@@ -48,7 +49,7 @@ class IntegerNormalizerTest extends TestCase
     {
         $this->assertEquals(
             null,
-            $this->service->normalize(Album::class, 'nbTracks', ['nb_tracks' => null])
+            $this->service->normalize(Album::class, 'nbTracks', ['nb_tracks' => null], new Field([]))
         );
     }
 }
