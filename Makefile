@@ -24,9 +24,11 @@ help:
 	@echo 'See Makefile for a complete list.'
 	@echo
 
-vendor: composer.lock
+composer.lock:
 	@echo
 	-$(COMPOSER_BIN) install $(COMPOSER_FLAGS)
+
+vendor: composer.lock
 
 phpstan: export SYMFONY_ENV = test
 phpstan: vendor

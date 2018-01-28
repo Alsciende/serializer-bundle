@@ -73,6 +73,8 @@ class ImportingService
     public function setLogger (LoggerInterface $logger): self
     {
         $this->logger = $logger;
+        $this->merging->setLogger($logger);
+        $this->scanner->setLogger($logger);
 
         return $this;
     }
