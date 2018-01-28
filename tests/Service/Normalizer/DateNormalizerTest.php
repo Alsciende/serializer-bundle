@@ -8,6 +8,7 @@
 
 namespace Alsciende\SerializerBundle\Test\Service\Normalizer;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
 use Alsciende\SerializerBundle\Service\MetadataService;
 use Alsciende\SerializerBundle\Service\Normalizer\DateNormalizer;
 use Alsciende\SerializerBundle\Test\Resources\Entity\Album;
@@ -38,7 +39,7 @@ class DateNormalizerTest extends TestCase
 
     public function testNormalize ()
     {
-        $result = $this->service->normalize(Album::class, 'dateRelease', ['release_date' => '1973-03-01']);
+        $result = $this->service->normalize(Album::class, 'dateRelease', ['release_date' => '1973-03-01'], new Field([]));
         $this->assertEquals(
             '1973-03-01 00:00:00',
             $result->format('Y-m-d H:i:s')
@@ -49,7 +50,7 @@ class DateNormalizerTest extends TestCase
     {
         $this->assertEquals(
             null,
-            $this->service->normalize(Album::class, 'dateRelease', ['release_date' => null])
+            $this->service->normalize(Album::class, 'dateRelease', ['release_date' => null], new Field([]))
         );
     }
 }

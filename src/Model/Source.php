@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Model;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
+
 /**
  * Represents a data source, a table to be serialized/deserialized
  *
@@ -70,12 +72,12 @@ class Source
      * Add a property
      *
      * @param string $name
-     * @param string $type
+     * @param Field $config
      * @return $this
      */
-    public function addProperty ($name, $type): self
+    public function addProperty ($name, Field $config): self
     {
-        $this->properties[$name] = $type;
+        $this->properties[$name] = $config;
 
         return $this;
     }

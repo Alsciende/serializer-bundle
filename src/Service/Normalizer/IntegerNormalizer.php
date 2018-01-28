@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Service\Normalizer;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
+
 /**
  * Description of IntegerNormalizer
  *
@@ -18,12 +20,14 @@ class IntegerNormalizer extends AbstractNormalizer implements NormalizerInterfac
     /**
      * @param string $className
      * @param string $fieldName
-     * @param array  $data
-     * @return integer
+     * @param array $data
+     * @param Field $config
+     * @return int|mixed|null
+     * @throws \Alsciende\SerializerBundle\Exception\MissingPropertyException
      */
-    public function normalize (string $className, string $fieldName, array $data)
+    public function normalize (string $className, string $fieldName, array $data, Field $config)
     {
-        $rawValue = $this->getRawValue($className, $fieldName, $data);
+        $rawValue = $this->getRawValue($className, $fieldName, $data, $config);
 
         return isset($rawValue) ? intval($rawValue) : null;
     }

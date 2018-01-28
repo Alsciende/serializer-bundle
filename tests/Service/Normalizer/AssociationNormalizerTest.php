@@ -8,6 +8,7 @@
 
 namespace Alsciende\SerializerBundle\Test\Service\Normalizer;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
 use Alsciende\SerializerBundle\Service\MetadataService;
 use Alsciende\SerializerBundle\Service\Normalizer\AssociationNormalizer;
 use Alsciende\SerializerBundle\Test\Resources\Entity\Album;
@@ -54,7 +55,7 @@ class AssociationNormalizerTest extends TestCase
     {
         $this->assertEquals(
             ['id' => 'pink-floyd'],
-            $this->service->normalize(Album::class, 'artist', ['artist_id' => "pink-floyd"])
+            $this->service->normalize(Album::class, 'artist', ['artist_id' => "pink-floyd"], new Field([]))
         );
     }
 
@@ -62,7 +63,7 @@ class AssociationNormalizerTest extends TestCase
     {
         $this->assertEquals(
             ['id' => null],
-            $this->service->normalize(Album::class, 'artist', ['artist_id' => null])
+            $this->service->normalize(Album::class, 'artist', ['artist_id' => null], new Field([]))
         );
     }
 }

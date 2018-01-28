@@ -3,6 +3,8 @@ declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Service\Normalizer;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
+
 /**
  * Description of BooleanNormalizer
  *
@@ -18,12 +20,14 @@ class BooleanNormalizer extends AbstractNormalizer implements NormalizerInterfac
     /**
      * @param string $className
      * @param string $fieldName
-     * @param array  $data
-     * @return bool
+     * @param array $data
+     * @param Field $config
+     * @return bool|mixed|null
+     * @throws \Alsciende\SerializerBundle\Exception\MissingPropertyException
      */
-    public function normalize (string $className, string $fieldName, array $data)
+    public function normalize (string $className, string $fieldName, array $data, Field $config)
     {
-        $rawValue = $this->getRawValue($className, $fieldName, $data);
+        $rawValue = $this->getRawValue($className, $fieldName, $data, $config);
 
         return isset($rawValue) ? boolval($rawValue) : null;
     }

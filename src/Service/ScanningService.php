@@ -28,8 +28,7 @@ class ScanningService
     public function __construct (
         MetadataService $metadataService,
         Reader $reader
-    )
-    {
+    ) {
         $this->metadataService = $metadataService;
         $this->reader = $reader;
     }
@@ -54,7 +53,7 @@ class ScanningService
         $sources = [];
 
         $allManagedClassNames = $this->metadataService->getAllManagedClassNames();
-        if($this->logger instanceof LoggerInterface) {
+        if ($this->logger instanceof LoggerInterface) {
             $this->logger->notice('Classes discovered through ORM Metadata', $allManagedClassNames);
         }
 
@@ -65,7 +64,7 @@ class ScanningService
             }
         }
 
-        if($this->logger instanceof LoggerInterface) {
+        if ($this->logger instanceof LoggerInterface) {
             $this->logger->notice('List of Skizzle sources', array_map(function (Source $source) {
                 return $source->getClassName();
             }, $sources));
@@ -93,7 +92,7 @@ class ScanningService
     }
 
     /**
-     * @param Skizzle          $annotation
+     * @param Skizzle $annotation
      * @param \ReflectionClass $reflectionClass
      * @return Source
      */
@@ -103,8 +102,8 @@ class ScanningService
 
         foreach ($reflectionClass->getProperties() as $reflectionProperty) {
             $annotation = $this->reader->getPropertyAnnotation($reflectionProperty, Skizzle\Field::class);
-            if ($annotation && isset($annotation->type)) {
-                $source->addProperty($reflectionProperty->name, $annotation->type);
+            if ($annotation instanceof Skizzle\Field) {
+                $source->addProperty($reflectionProperty->name, $annotation);
             }
         }
 

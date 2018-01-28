@@ -53,8 +53,8 @@ class NormalizerService
     {
         $result = [];
 
-        foreach ($propertyMap as $property => $type) {
-            $result[$property] = $this->getNormalizer($type)->normalize($className, $property, $data);
+        foreach ($propertyMap as $property => $config) {
+            $result[$property] = $this->getNormalizer($config->type)->normalize($className, $property, $data, $config);
         }
 
         return $result;

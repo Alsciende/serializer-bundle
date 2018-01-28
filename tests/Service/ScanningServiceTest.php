@@ -2,6 +2,7 @@
 
 namespace Alsciende\SerializerBundle\Test\Service;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
 use Alsciende\SerializerBundle\Model\Source;
 use Alsciende\SerializerBundle\Service\MetadataService;
 use Alsciende\SerializerBundle\Service\ScanningService;
@@ -45,7 +46,14 @@ class ScanningServiceTest extends TestCase
         $this->assertInstanceOf(Source::class, $result);
         $this->assertEquals(Artist::class, $result->getClassName());
         $this->assertEmpty($result->getBreak());
-        $this->assertEquals(["id" => "string", "name" => "string", "styles" => "array", "foundedIn" => "string"], $result->getProperties());
+        $this->assertInstanceOf(Field::class, $result->getProperties()['id']);
+        $this->assertEquals("string", $result->getProperties()['id']->type);
+        $this->assertInstanceOf(Field::class, $result->getProperties()['name']);
+        $this->assertEquals("string", $result->getProperties()['name']->type);
+        $this->assertInstanceOf(Field::class, $result->getProperties()['styles']);
+        $this->assertEquals("array", $result->getProperties()['styles']->type);
+        $this->assertInstanceOf(Field::class, $result->getProperties()['foundedIn']);
+        $this->assertEquals("string", $result->getProperties()['foundedIn']->type);
     }
 
     public function testBuildFromClassAlbum()
@@ -59,7 +67,18 @@ class ScanningServiceTest extends TestCase
         $this->assertInstanceOf(Source::class, $result);
         $this->assertEquals(Album::class, $result->getClassName());
         $this->assertEquals('artist_id', $result->getBreak());
-        $this->assertEquals(["id" => "string", "name" => "string", "artist" => "association", "label" => "association", "nbTracks" => "integer", "dateRelease" => "date"], $result->getProperties());
+        $this->assertInstanceOf(Field::class, $result->getProperties()['id']);
+        $this->assertEquals("string", $result->getProperties()['id']->type);
+        $this->assertInstanceOf(Field::class, $result->getProperties()['name']);
+        $this->assertEquals("string", $result->getProperties()['name']->type);
+        $this->assertInstanceOf(Field::class, $result->getProperties()['artist']);
+        $this->assertEquals("association", $result->getProperties()['artist']->type);
+        $this->assertInstanceOf(Field::class, $result->getProperties()['label']);
+        $this->assertEquals("association", $result->getProperties()['label']->type);
+        $this->assertInstanceOf(Field::class, $result->getProperties()['nbTracks']);
+        $this->assertEquals("integer", $result->getProperties()['nbTracks']->type);
+        $this->assertInstanceOf(Field::class, $result->getProperties()['dateRelease']);
+        $this->assertEquals("date", $result->getProperties()['dateRelease']->type);
     }
 
     public function testBuildFromClassOther()
@@ -86,6 +105,13 @@ class ScanningServiceTest extends TestCase
         $this->assertInstanceOf(Source::class, $result[0]);
         $this->assertEquals(Artist::class, $result[0]->getClassName());
         $this->assertEmpty($result[0]->getBreak());
-        $this->assertEquals(["id" => "string", "name" => "string", "styles" => "array", "foundedIn" => "string"], $result[0]->getProperties());
+        $this->assertInstanceOf(Field::class, $result[0]->getProperties()['id']);
+        $this->assertEquals("string", $result[0]->getProperties()['id']->type);
+        $this->assertInstanceOf(Field::class, $result[0]->getProperties()['name']);
+        $this->assertEquals("string", $result[0]->getProperties()['name']->type);
+        $this->assertInstanceOf(Field::class, $result[0]->getProperties()['styles']);
+        $this->assertEquals("array", $result[0]->getProperties()['styles']->type);
+        $this->assertInstanceOf(Field::class, $result[0]->getProperties()['foundedIn']);
+        $this->assertEquals("string", $result[0]->getProperties()['foundedIn']->type);
     }
 }
