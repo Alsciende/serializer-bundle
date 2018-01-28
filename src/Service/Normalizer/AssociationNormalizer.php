@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Service\Normalizer;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
 use Alsciende\SerializerBundle\Exception\MissingPropertyException;
 use Alsciende\SerializerBundle\Exception\ReverseSideException;
 use Alsciende\SerializerBundle\Service\MetadataService;
@@ -32,10 +33,14 @@ class AssociationNormalizer extends AbstractNormalizer implements NormalizerInte
     /**
      * @param string $className
      * @param string $fieldName
-     * @param array  $data
-     * @return object|null
+     * @param array $data
+     * @param Field $config
+     * @return mixed|null|object
+     * @throws MissingPropertyException
+     * @throws ReverseSideException
+     * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    public function normalize (string $className, string $fieldName, array $data)
+    public function normalize (string $className, string $fieldName, array $data, Field $config)
     {
         $associationMapping = $this->metadata->getAssociationMapping($className, $fieldName);
 

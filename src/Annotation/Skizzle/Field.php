@@ -24,4 +24,14 @@ class Field extends Annotation
      * @Enum({"string","integer","boolean","date","array","association"})
      */
     public $type;
+
+    /**
+     * @var boolean
+     */
+    public $mandatory = true;
+
+    /**
+     * @var mixed
+     */
+    public $default;
 }

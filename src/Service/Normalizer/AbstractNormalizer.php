@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Service\Normalizer;
 
+use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
 use Alsciende\SerializerBundle\Exception\MissingPropertyException;
 use Alsciende\SerializerBundle\Service\MetadataService;
 
@@ -23,15 +24,20 @@ abstract class AbstractNormalizer
     /**
      * @param string $className
      * @param string $fieldName
-     * @param array  $data
+     * @param array $data
+     * @param array $config
      * @return mixed
      * @throws MissingPropertyException
      */
-    protected function getRawValue (string $className, string $fieldName, array $data)
+    protected function getRawValue (string $className, string $fieldName, array $data, Field $config)
     {
         $columnName = $this->metadata->getColumnName($className, $fieldName);
 
         if (!key_exists($columnName, $data)) {
+            if ($config->mandatory === false) {
+                return $config->default;
+            }
+
             throw new MissingPropertyException($data, $columnName);
         }
 

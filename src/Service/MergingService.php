@@ -80,8 +80,8 @@ class MergingService
      */
     private function getChangeSet (string $className, $entity, array $data, array $propertyMap): array
     {
-        foreach ($propertyMap as $property => $type) {
-            if ($this->normalizer->getNormalizer($type)->isEqual(
+        foreach ($propertyMap as $property => $config) {
+            if ($this->normalizer->getNormalizer($config->type)->isEqual(
                 $data[$property],
                 $this->metadata->getFieldValue($className, $entity, $property)
             )) {
