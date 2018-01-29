@@ -15,7 +15,7 @@ class ReverseSideException extends \Exception
      * @param string $className
      * @param string $fieldName
      */
-    public function __construct (string $className, string $fieldName)
+    public function __construct(string $className, string $fieldName)
     {
         parent::__construct(sprintf(
             'Field [%s] is reverse side in class [%s]. Excepting owning side.',

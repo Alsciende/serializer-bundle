@@ -13,7 +13,7 @@ class PersistenceManager
     /** @var EntityManagerInterface $entityManager */
     private $entityManager;
 
-    public function __construct (EntityManagerInterface $entityManager)
+    public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
     }
@@ -24,7 +24,7 @@ class PersistenceManager
      * @param object $entity
      * @return object
      */
-    public function findManaged ($entity)
+    public function findManaged($entity)
     {
         $classMetadata = $this->entityManager->getClassMetadata(get_class($entity));
         $className = $classMetadata->name;
@@ -32,7 +32,7 @@ class PersistenceManager
 
         $obj = $this->entityManager->find($className, $id);
 
-        if($obj instanceof $className) {
+        if ($obj instanceof $className) {
             $this->entityManager->initializeObject($obj);
         } else {
             $obj = new $className;

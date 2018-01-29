@@ -30,7 +30,7 @@ class Fragment
      */
     private $hydratedEntity;
 
-    public function __construct (Block $block, array $data)
+    public function __construct(Block $block, array $data)
     {
         $this->block = $block;
         $this->rawData = $data;
@@ -40,7 +40,7 @@ class Fragment
      *
      * @return array
      */
-    public function getRawData (): array
+    public function getRawData(): array
     {
         return $this->rawData;
     }
@@ -49,7 +49,7 @@ class Fragment
      *
      * @return Block
      */
-    public function getBlock (): Block
+    public function getBlock(): Block
     {
         return $this->block;
     }
@@ -57,7 +57,7 @@ class Fragment
     /**
      * @return object
      */
-    public function getHydratedEntity ()
+    public function getHydratedEntity()
     {
         return $this->hydratedEntity;
     }
@@ -67,7 +67,7 @@ class Fragment
      *
      * @return $this
      */
-    public function setHydratedEntity ($hydratedEntity): self
+    public function setHydratedEntity($hydratedEntity): self
     {
         $this->hydratedEntity = $hydratedEntity;
 
@@ -77,7 +77,7 @@ class Fragment
     /**
      * @return array
      */
-    public function getNormalizedData (): array
+    public function getNormalizedData(): array
     {
         return $this->normalizedData;
     }
@@ -87,7 +87,7 @@ class Fragment
      *
      * @return $this
      */
-    public function setNormalizedData ($normalizedData): self
+    public function setNormalizedData($normalizedData): self
     {
         $this->normalizedData = $normalizedData;
 

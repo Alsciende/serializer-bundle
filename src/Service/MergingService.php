@@ -20,7 +20,7 @@ class MergingService
     /** @var NormalizerService $normalizer */
     private $normalizer;
 
-    public function __construct (
+    public function __construct(
         MetadataService $metadata,
         NormalizerService $normalizer
     ) {
@@ -33,7 +33,7 @@ class MergingService
      *
      * @return $this
      */
-    public function setLogger (LoggerInterface $logger)
+    public function setLogger(LoggerInterface $logger)
     {
         $this->logger = $logger;
 
@@ -46,7 +46,7 @@ class MergingService
      * @return object
      * @throws UnknownTypeException
      */
-    public function merge ($entity, Fragment $fragment)
+    public function merge($entity, Fragment $fragment)
     {
         $className = $fragment->getBlock()->getSource()->getClassName();
 
@@ -78,7 +78,7 @@ class MergingService
      * @return array
      * @throws UnknownTypeException
      */
-    private function getChangeSet (string $className, $entity, array $data, array $propertyMap): array
+    private function getChangeSet(string $className, $entity, array $data, array $propertyMap): array
     {
         foreach ($propertyMap as $property => $config) {
             if ($this->normalizer->getNormalizer($config->type)->isEqual(

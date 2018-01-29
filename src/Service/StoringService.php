@@ -20,7 +20,7 @@ class StoringService
      * @param string $basePath
      * @return Block[]
      */
-    public function retrieveBlocks (Source $source, string $basePath): array
+    public function retrieveBlocks(Source $source, string $basePath): array
     {
         $parts = explode('\\', $source->getClassName());
         $path = $basePath . "/" . array_pop($parts);
@@ -35,7 +35,7 @@ class StoringService
      * @param string $path
      * @return void
      */
-    public function scanDirectory (Source $source, string $path)
+    public function scanDirectory(Source $source, string $path)
     {
         if (file_exists($path) && is_dir($path)) {
             foreach (glob("$path/*.json") as $filename) {
@@ -49,7 +49,7 @@ class StoringService
      * @param string $path
      * @return void
      */
-    public function scanFile (Source $source, string $path)
+    public function scanFile(Source $source, string $path)
     {
         if (file_exists($path) && is_file($path)) {
             $source->addBlock(new Block(file_get_contents($path), $path));

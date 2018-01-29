@@ -12,7 +12,7 @@ class StringNormalizer extends AbstractNormalizer implements NormalizerInterface
     /**
      * @inheritdoc
      */
-    public function supports ()
+    public function supports()
     {
         return 'string';
     }
@@ -25,13 +25,13 @@ class StringNormalizer extends AbstractNormalizer implements NormalizerInterface
      * @return mixed|null|string
      * @throws \Alsciende\SerializerBundle\Exception\MissingPropertyException
      */
-    public function normalize (string $className, string $fieldName, array $data, Field $config)
+    public function normalize(string $className, string $fieldName, array $data, Field $config)
     {
         $rawValue = $this->getRawValue($className, $fieldName, $data, $config);
         return isset($rawValue) ? strval($rawValue) : null;
     }
 
-    public function isEqual ($a, $b)
+    public function isEqual($a, $b)
     {
         return $a === $b;
     }

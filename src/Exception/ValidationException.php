@@ -20,7 +20,7 @@ class ValidationException extends \Exception
      * @param Fragment                         $fragment
      * @param ConstraintViolationListInterface $errors
      */
-    public function __construct (Fragment $fragment, ConstraintViolationListInterface $errors)
+    public function __construct(Fragment $fragment, ConstraintViolationListInterface $errors)
     {
         parent::__construct(sprintf(
             'Validation errors for path [%s] with data %s: %s.',

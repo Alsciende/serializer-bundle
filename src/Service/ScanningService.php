@@ -25,7 +25,7 @@ class ScanningService
     /** @var LoggerInterface $logger */
     private $logger;
 
-    public function __construct (
+    public function __construct(
         MetadataService $metadataService,
         Reader $reader
     ) {
@@ -38,7 +38,7 @@ class ScanningService
      *
      * @return $this
      */
-    public function setLogger (LoggerInterface $logger): self
+    public function setLogger(LoggerInterface $logger): self
     {
         $this->logger = $logger;
 
@@ -48,7 +48,7 @@ class ScanningService
     /**
      * @return Source[]
      */
-    public function findSources (): array
+    public function findSources(): array
     {
         $sources = [];
 
@@ -80,7 +80,7 @@ class ScanningService
      * @param string $className
      * @return Source|null
      */
-    public function buildFromClass (string $className)
+    public function buildFromClass(string $className)
     {
         $reflectionClass = new \ReflectionClass($className);
         $annotation = $this->reader->getClassAnnotation($reflectionClass, Skizzle::class);
@@ -96,7 +96,7 @@ class ScanningService
      * @param \ReflectionClass $reflectionClass
      * @return Source
      */
-    private function buildSource (Skizzle $annotation, \ReflectionClass $reflectionClass): Source
+    private function buildSource(Skizzle $annotation, \ReflectionClass $reflectionClass): Source
     {
         $source = new Source($reflectionClass->getName(), $annotation->break);
 

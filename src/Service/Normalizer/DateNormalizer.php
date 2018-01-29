@@ -14,7 +14,7 @@ class DateNormalizer extends AbstractNormalizer implements NormalizerInterface
 {
     const FORMAT = '!Y-m-d';
 
-    public function supports ()
+    public function supports()
     {
         return 'date';
     }
@@ -27,14 +27,14 @@ class DateNormalizer extends AbstractNormalizer implements NormalizerInterface
      * @return bool|\DateTime|mixed|null
      * @throws \Alsciende\SerializerBundle\Exception\MissingPropertyException
      */
-    public function normalize (string $className, string $fieldName, array $data, Field $config)
+    public function normalize(string $className, string $fieldName, array $data, Field $config)
     {
         $rawValue = $this->getRawValue($className, $fieldName, $data, $config);
 
         return isset($rawValue) ? \DateTime::createFromFormat(self::FORMAT, $rawValue) : null;
     }
 
-    public function isEqual ($a, $b)
+    public function isEqual($a, $b)
     {
         return $a == $b;
     }

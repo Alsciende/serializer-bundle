@@ -20,7 +20,7 @@ class SourceOrderingService
     /** @var array */
     private $resolvedClassNames;
 
-    public function __construct (MetadataService $metadataAdapter)
+    public function __construct(MetadataService $metadataAdapter)
     {
         $this->metadataAdapter = $metadataAdapter;
     }
@@ -32,7 +32,7 @@ class SourceOrderingService
      * @param Source[] $sources
      * @return Source[]
      */
-    public function orderSources (array $sources): array
+    public function orderSources(array $sources): array
     {
         $resolvedSources = [];
         $this->resolvedClassNames = [];
@@ -58,7 +58,7 @@ class SourceOrderingService
      * @param Source[] $sources
      * @return integer|null
      */
-    private function findNextResolvedSource (array $sources)
+    private function findNextResolvedSource(array $sources)
     {
         foreach ($sources as $index => $source) {
             if ($this->allTargetClassesAreResolved($source->getClassName())) {
@@ -75,7 +75,7 @@ class SourceOrderingService
      * @param string $className
      * @return boolean
      */
-    private function allTargetClassesAreResolved (string $className): bool
+    private function allTargetClassesAreResolved(string $className): bool
     {
         $targetClasses = $this->metadataAdapter->getAllTargetClasses($className);
         foreach (array_values($targetClasses) as $targetClass) {
