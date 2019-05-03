@@ -19,13 +19,13 @@ class AssociationNormalizer extends AbstractNormalizer implements NormalizerInte
     /** @var EntityManagerInterface $entityManager */
     private $entityManager;
 
-    public function __construct (MetadataService $metadata, EntityManagerInterface $entityManager)
+    public function __construct(MetadataService $metadata, EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
         parent::__construct($metadata);
     }
 
-    public function supports ()
+    public function supports()
     {
         return 'association';
     }
@@ -40,7 +40,7 @@ class AssociationNormalizer extends AbstractNormalizer implements NormalizerInte
      * @throws ReverseSideException
      * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    public function normalize (string $className, string $fieldName, array $data, Field $config)
+    public function normalize(string $className, string $fieldName, array $data, Field $config)
     {
         $associationMapping = $this->metadata->getAssociationMapping($className, $fieldName);
 
@@ -59,7 +59,7 @@ class AssociationNormalizer extends AbstractNormalizer implements NormalizerInte
         return $this->entityManager->getReference($associationMapping['targetEntity'], $id);
     }
 
-    public function isEqual ($a, $b)
+    public function isEqual($a, $b)
     {
         return $a === $b;
     }

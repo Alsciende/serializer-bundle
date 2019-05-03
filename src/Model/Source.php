@@ -24,7 +24,7 @@ class Source
     /** @var Block[] $blocks */
     private $blocks;
 
-    public function __construct (string $className, string $break = null)
+    public function __construct(string $className, string $break = null)
     {
         $this->className = $className;
         $this->break = $break;
@@ -36,7 +36,7 @@ class Source
      *
      * @return string|null
      */
-    public function getBreak ()
+    public function getBreak()
     {
         return $this->break;
     }
@@ -44,7 +44,7 @@ class Source
     /**
      * @return bool
      */
-    public function hasBreak (): bool
+    public function hasBreak(): bool
     {
         return isset($this->break);
     }
@@ -53,7 +53,7 @@ class Source
      *
      * @return string
      */
-    function getClassName (): string
+    public function getClassName(): string
     {
         return $this->className;
     }
@@ -63,7 +63,7 @@ class Source
      *
      * @return array
      */
-    public function getProperties (): array
+    public function getProperties(): array
     {
         return $this->properties;
     }
@@ -75,7 +75,7 @@ class Source
      * @param Field $config
      * @return $this
      */
-    public function addProperty ($name, Field $config): self
+    public function addProperty($name, Field $config): self
     {
         $this->properties[$name] = $config;
 
@@ -85,7 +85,7 @@ class Source
     /**
      * @return Block[]
      */
-    public function getBlocks (): array
+    public function getBlocks(): array
     {
         return $this->blocks;
     }
@@ -94,7 +94,7 @@ class Source
      * @param Block $block
      * @return $this
      */
-    public function addBlock (Block $block): self
+    public function addBlock(Block $block): self
     {
         $this->blocks[] = $block;
         $block->setSource($this);

@@ -15,7 +15,7 @@ class MetadataService
 {
     private $metadataFactory;
 
-    public function __construct (ClassMetadataFactory $metadataFactory)
+    public function __construct(ClassMetadataFactory $metadataFactory)
     {
         $this->metadataFactory = $metadataFactory;
     }
@@ -25,7 +25,7 @@ class MetadataService
      *
      * @return string[]
      */
-    public function getAllManagedClassNames (): array
+    public function getAllManagedClassNames(): array
     {
         $result = [];
         $allMetadata = $this->getAllMetadata();
@@ -43,7 +43,7 @@ class MetadataService
      * @param string $className
      * @return string[]
      */
-    public function getAllTargetClasses (string $className): array
+    public function getAllTargetClasses(string $className): array
     {
         $result = [];
 
@@ -62,7 +62,7 @@ class MetadataService
      * @param string $fieldName
      * @return string
      */
-    public function getColumnName (string $className, string $fieldName): string
+    public function getColumnName(string $className, string $fieldName): string
     {
         $classMetadata = $this->getMetadataFor($className);
 
@@ -75,7 +75,7 @@ class MetadataService
      * @return array
      * @throws \Doctrine\ORM\Mapping\MappingException
      */
-    public function getAssociationMapping (string $className, string $fieldName): array
+    public function getAssociationMapping(string $className, string $fieldName): array
     {
         $classMetadata = $this->getMetadataFor($className);
 
@@ -88,7 +88,7 @@ class MetadataService
      * @param string $fieldName
      * @return mixed
      */
-    public function getFieldValue (string $className, $entity, string $fieldName)
+    public function getFieldValue(string $className, $entity, string $fieldName)
     {
         return $this->getMetadataFor($className)->getFieldValue($entity, $fieldName);
     }
@@ -100,7 +100,7 @@ class MetadataService
      * @param mixed  $value
      * @return void
      */
-    public function setFieldValue (string $className, $entity, string $fieldName, $value)
+    public function setFieldValue(string $className, $entity, string $fieldName, $value)
     {
         $this->getMetadataFor($className)->setFieldValue($entity, $fieldName, $value);
     }
@@ -108,7 +108,7 @@ class MetadataService
     /**
      * @return \Doctrine\Common\Persistence\Mapping\ClassMetadata[]
      */
-    private function getAllMetadata (): array
+    private function getAllMetadata(): array
     {
         return $this->metadataFactory->getAllMetadata();
     }
@@ -117,7 +117,7 @@ class MetadataService
      * @param string $className
      * @return ClassMetadata
      */
-    private function getMetadataFor (string $className): ClassMetadata
+    private function getMetadataFor(string $className): ClassMetadata
     {
         $metadata = $this->metadataFactory->getMetadataFor($className);
         if ($metadata instanceof ClassMetadata) {

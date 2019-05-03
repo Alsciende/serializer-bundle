@@ -12,7 +12,7 @@ use Alsciende\SerializerBundle\Annotation\Skizzle\Field;
  */
 class BooleanNormalizer extends AbstractNormalizer implements NormalizerInterface
 {
-    public function supports ()
+    public function supports()
     {
         return 'boolean';
     }
@@ -25,14 +25,14 @@ class BooleanNormalizer extends AbstractNormalizer implements NormalizerInterfac
      * @return bool|mixed|null
      * @throws \Alsciende\SerializerBundle\Exception\MissingPropertyException
      */
-    public function normalize (string $className, string $fieldName, array $data, Field $config)
+    public function normalize(string $className, string $fieldName, array $data, Field $config)
     {
         $rawValue = $this->getRawValue($className, $fieldName, $data, $config);
 
         return isset($rawValue) ? boolval($rawValue) : null;
     }
 
-    public function isEqual ($a, $b)
+    public function isEqual($a, $b)
     {
         return $a === $b;
     }

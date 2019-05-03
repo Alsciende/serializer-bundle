@@ -3,20 +3,21 @@ declare(strict_types=1);
 
 namespace Alsciende\SerializerBundle\Exception;
 
+use Alsciende\SerializerBundle\Model\Block;
+
 /**
  */
 class InvalidBlockDataException extends \Exception
 {
-    /** @var string $data */
-    private $data;
-
     /**
      * InvalidBlockDataException constructor.
-     * @param string $data
+     * @param Block $block
      */
-    public function __construct (string $data)
+    public function __construct(Block $block)
     {
-        $this->data = $data;
-        parent::__construct('Block data cannot be decoded to a numeric array.');
+        parent::__construct(sprintf(
+            'Error while decoding %s: data is not an array of objects.',
+            $block->getPath()
+        ));
     }
 }

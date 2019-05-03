@@ -21,7 +21,7 @@ class NormalizerService
      * NormalizerManager constructor.
      * @param NormalizerInterface[] $normalizers
      */
-    public function __construct ($normalizers)
+    public function __construct($normalizers)
     {
         foreach ($normalizers as $normalizer) {
             $this->normalizers[$normalizer->supports()] = $normalizer;
@@ -32,7 +32,7 @@ class NormalizerService
      * @param Fragment $fragment
      * @return Fragment
      */
-    public function normalize (Fragment $fragment): Fragment
+    public function normalize(Fragment $fragment): Fragment
     {
         return $fragment->setNormalizedData(
             $this->getNormalizedData(
@@ -49,7 +49,7 @@ class NormalizerService
      * @param array $data
      * @return array
      */
-    public function getNormalizedData (string $className, array $propertyMap, array $data): array
+    public function getNormalizedData(string $className, array $propertyMap, array $data): array
     {
         $result = [];
 
@@ -65,7 +65,7 @@ class NormalizerService
      * @return NormalizerInterface
      * @throws UnknownTypeException
      */
-    public function getNormalizer (string $type): NormalizerInterface
+    public function getNormalizer(string $type): NormalizerInterface
     {
         $normalizer = $this->normalizers[$type];
         if (!$normalizer instanceof NormalizerInterface) {

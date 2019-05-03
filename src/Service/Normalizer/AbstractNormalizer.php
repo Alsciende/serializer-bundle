@@ -16,7 +16,7 @@ abstract class AbstractNormalizer
      */
     protected $metadata;
 
-    public function __construct (MetadataService $metadata)
+    public function __construct(MetadataService $metadata)
     {
         $this->metadata = $metadata;
     }
@@ -29,7 +29,7 @@ abstract class AbstractNormalizer
      * @return mixed
      * @throws MissingPropertyException
      */
-    protected function getRawValue (string $className, string $fieldName, array $data, Field $config)
+    protected function getRawValue(string $className, string $fieldName, array $data, Field $config)
     {
         $columnName = $this->metadata->getColumnName($className, $fieldName);
 

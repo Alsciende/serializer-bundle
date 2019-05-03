@@ -44,7 +44,7 @@ class ImportingService
     /** @var ValidatorInterface $validator */
     private $validator;
 
-    public function __construct (
+    public function __construct(
         ScanningService $scanningService,
         StoringService $storingService,
         EncodingService $encodingService,
@@ -53,8 +53,7 @@ class ImportingService
         PersistenceManager $persistence,
         MergingService $merging,
         ValidatorInterface $validator
-    )
-    {
+    ) {
         $this->scanner = $scanningService;
         $this->storer = $storingService;
         $this->encoder = $encodingService;
@@ -70,7 +69,7 @@ class ImportingService
      *
      * @return $this
      */
-    public function setLogger (LoggerInterface $logger): self
+    public function setLogger(LoggerInterface $logger): self
     {
         $this->logger = $logger;
         $this->merging->setLogger($logger);
@@ -84,7 +83,7 @@ class ImportingService
      * @param bool   $usePersistence
      * @throws ValidationException
      */
-    public function import (string $path, bool $usePersistence = false)
+    public function import(string $path, bool $usePersistence = false)
     {
         $sources = $this->scanner->findSources();
 
@@ -119,7 +118,7 @@ class ImportingService
      * @param string $path
      * @return Fragment[]
      */
-    public function importSource (Source $source, string $path): array
+    public function importSource(Source $source, string $path): array
     {
         $result = [];
         foreach ($this->storer->retrieveBlocks($source, $path) as $block) {
@@ -138,7 +137,7 @@ class ImportingService
      * @param Block $block
      * @return Fragment[]
      */
-    public function importBlock (Block $block): array
+    public function importBlock(Block $block): array
     {
         $result = [];
         foreach ($this->encoder->decode($block) as $fragment) {
@@ -157,7 +156,7 @@ class ImportingService
      * @param Fragment $fragment
      * @return Fragment
      */
-    public function importFragment (Fragment $fragment): Fragment
+    public function importFragment(Fragment $fragment): Fragment
     {
         return $this->hydrator->hydrate($this->normalizer->normalize($fragment));
     }

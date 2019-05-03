@@ -10,7 +10,7 @@ namespace Alsciende\SerializerBundle\Exception;
  */
 class DependencyCycleException extends \Exception
 {
-    public function __construct ()
+    public function __construct()
     {
         parent::__construct('Sources contain a cycle of dependencies, or a dependency is not configured as a Source.');
     }

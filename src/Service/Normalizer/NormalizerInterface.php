@@ -11,7 +11,7 @@ interface NormalizerInterface
     /**
      * @return string
      */
-    public function supports ();
+    public function supports();
 
     /**
      * @param string $className
@@ -21,12 +21,12 @@ interface NormalizerInterface
      * @return mixed
      * @throws MissingPropertyException
      */
-    public function normalize (string $className, string $fieldName, array $data, Field $config);
+    public function normalize(string $className, string $fieldName, array $data, Field $config);
 
     /**
      * @param mixed $a
      * @param mixed $b
      * @return bool
      */
-    public function isEqual ($a, $b);
+    public function isEqual($a, $b);
 }

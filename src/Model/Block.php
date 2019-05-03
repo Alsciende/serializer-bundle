@@ -37,7 +37,7 @@ class Block
      * @param string      $data
      * @param string|null $path
      */
-    public function __construct (string $data, string $path = null)
+    public function __construct(string $data, string $path = null)
     {
         $this->data = $data;
         if (isset($path)) {
@@ -50,7 +50,7 @@ class Block
      *
      * @return Source
      */
-    public function getSource (): Source
+    public function getSource(): Source
     {
         return $this->source;
     }
@@ -59,7 +59,7 @@ class Block
      *
      * @return string|null
      */
-    public function getPath ()
+    public function getPath()
     {
         return $this->path;
     }
@@ -68,7 +68,7 @@ class Block
      *
      * @return string
      */
-    public function getData (): string
+    public function getData(): string
     {
         return $this->data;
     }
@@ -77,7 +77,7 @@ class Block
      *
      * @return string
      */
-    public function getName (): string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -87,7 +87,7 @@ class Block
      * @param Source $source
      * @return $this
      */
-    public function setSource (Source $source): self
+    public function setSource(Source $source): self
     {
         $this->source = $source;
 
@@ -99,7 +99,7 @@ class Block
      * @param string $name
      * @return $this
      */
-    public function setName ($name): self
+    public function setName($name): self
     {
         $this->name = $name;
 
