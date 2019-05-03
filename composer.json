@@ -1,6 +1,6 @@
 {
   "name": "alsciende/serializer-bundle",
-  "type": "symfony/bundle",
+  "type": "library",
   "description": "Alsciende SerializerBundle",
   "license": "MIT",
   "authors": [
